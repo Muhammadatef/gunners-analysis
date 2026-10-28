@@ -1,0 +1,117 @@
+{
+  "AFC Bournemouth": {
+    "file": "afc_bournemouth.png",
+    "sofascore_team_id": 60,
+    "verified_name": "Bournemouth"
+  },
+  "Arsenal": {
+    "file": "arsenal.png",
+    "sofascore_team_id": 42,
+    "verified_name": "Arsenal"
+  },
+  "Aston Villa": {
+    "file": "aston_villa.png",
+    "sofascore_team_id": 40,
+    "verified_name": "Aston Villa"
+  },
+  "Brentford": {
+    "file": "brentford.png",
+    "sofascore_team_id": 50,
+    "verified_name": "Brentford"
+  },
+  "Brighton & Hove Albion": {
+    "file": "brighton-hove_albion.png",
+    "sofascore_team_id": 30,
+    "verified_name": "Brighton & Hove Albion"
+  },
+  "Burnley": {
+    "file": "burnley.png",
+    "sofascore_team_id": 6,
+    "verified_name": "Burnley"
+  },
+  "Chelsea": {
+    "file": "chelsea.png",
+    "sofascore_team_id": 38,
+    "verified_name": "Chelsea"
+  },
+  "Coventry City": {
+    "file": "coventry_city.png",
+    "sofascore_team_id": 11,
+    "verified_name": "Coventry City"
+  },
+  "Crystal Palace": {
+    "file": "crystal_palace.png",
+    "sofascore_team_id": 7,
+    "verified_name": "Crystal Palace"
+  },
+  "Everton": {
+    "file": "everton.png",
+    "sofascore_team_id": 48,
+    "verified_name": "Everton"
+  },
+  "Fulham": {
+    "file": "fulham.png",
+    "sofascore_team_id": 43,
+    "verified_name": "Fulham"
+  },
+  "Hull City": {
+    "file": "hull_city.png",
+    "sofascore_team_id": 96,
+    "verified_name": "Hull City"
+  },
+  "Ipswich Town": {
+    "file": "ipswich_town.png",
+    "sofascore_team_id": 32,
+    "verified_name": "Ipswich Town"
+  },
+  "Leeds United": {
+    "file": "leeds_united.png",
+    "sofascore_team_id": 34,
+    "verified_name": "Leeds United"
+  },
+  "Liverpool": {
+    "file": "liverpool.png",
+    "sofascore_team_id": 44,
+    "verified_name": "Liverpool FC"
+  },
+  "Manchester City": {
+    "file": "manchester_city.png",
+    "sofascore_team_id": 17,
+    "verified_name": "Manchester City"
+  },
+  "Manchester United": {
+    "file": "manchester_united.png",
+    "sofascore_team_id": 35,
+    "verified_name": "Manchester United"
+  },
+  "Newcastle United": {
+    "file": "newcastle_united.png",
+    "sofascore_team_id": 39,
+    "verified_name": "Newcastle United"
+  },
+  "Nottingham Forest": {
+    "file": "nottingham_forest.png",
+    "sofascore_team_id": 14,
+    "verified_name": "Nottingham Forest"
+  },
+  "Sunderland": {
+    "file": "sunderland.png",
+    "sofascore_team_id": 41,
+    "verified_name": "Sunderland"
+  },
+  "Tottenham Hotspur": {
+    "file": "tottenham_hotspur.png",
+    "sofascore_team_id": 33,
+    "verified_name": "Tottenham Hotspur"
+  },
+  "West Ham United": {
+    "file": "west_ham_united.png",
+    "sofascore_team_id": 37,
+    "verified_name": "West Ham United"
+  },
+  "Wolverhampton": {
+    "file": "wolverhampton.png",
+    "sofascore_team_id": 3,
+    "verified_name": "Wolverhampton"
+  }
+}

@@ -1,0 +1,1 @@
+"""Postgres warehouse for GunnersAnalysis."""

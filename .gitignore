@@ -1,0 +1,63 @@
+# --- secrets -----------------------------------------------------------
+# .env holds real credentials (kakashi: 6 findings, 1 credential).
+# Commit .env.example instead.
+.env
+.env.*
+!.env.example
+
+# Local editor rules and frontend dependencies.
+.cursor/
+node_modules/
+*.pem
+*.key
+
+# --- python ------------------------------------------------------------
+venv/
+.venv/
+.venv-tracking/
+__pycache__/
+*.pt
+yolov8*.pt
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- scraped + derived data -------------------------------------------
+# Regenerable from the source sites; large and churny.
+data/raw/*.html
+data/raw/*.json
+data/processed/
+data/quality/
+data/visualizations/
+# Persistent Chrome profile for the scraper - cookies, not source.
+data/browser-profile/
+data/tracking/**
+!data/tracking/.gitkeep
+logs/
+
+# --- rendered output ---------------------------------------------------
+# Keep the analysis artifacts (manifests, written reports, season index),
+# drop the images - a 2.7 MB dashboard per fixture is ~100 MB a season and
+# every panel can be re-rendered from data.
+output/**/*.png
+output/**/*.gif
+final_output/
+final_output_sofascore/
+
+# --- worktree convenience symlinks -------------------------------------
+# A git worktree gets its own working directory, so `data/` and `output/`
+# start empty there and every scraped match would be invisible to it. The
+# fix is a symlink back to the main checkout - which must never be committed:
+# merged into that checkout it becomes a symlink pointing at itself, and git
+# would replace the real directory with it.
+/data
+/output/output
+
+# --- local tooling -----------------------------------------------------
+.claude/
+.DS_Store
+*.swp
+filestructure.txt
+backups/

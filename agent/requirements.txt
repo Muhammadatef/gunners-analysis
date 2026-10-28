@@ -1,0 +1,28 @@
+# Football Analyst AI Agent — the layer after Postgres.
+# The warehouse pipeline's own dependencies are in orchestrator/requirements.txt
+# and airflow/requirements.txt; nothing here is needed to scrape or load a match.
+
+# Orchestration and optimization. LiteLLM comes with it and is what routes
+# every call through OpenRouter, so model choice stays configuration.
+dspy>=3.3.0
+
+# MIPROv2's search is Optuna-backed. It is an *optional* dspy dependency and
+# MIPROv2 does not check for it until after bootstrapping and instruction
+# proposal — roughly fifteen minutes in — so it is pinned explicitly here
+# rather than left to be discovered the expensive way.
+optuna>=4.0
+
+# Retrieval. pgvector keeps documents and embeddings beside the events that
+# generated them, so metadata filtering and similarity search are one query.
+pgvector>=0.4
+sqlalchemy>=2.0
+
+# Local embeddings. OpenRouter serves chat only, so vectors are computed here.
+# fastembed runs the model through ONNX Runtime, which keeps ~2.5 GB of torch
+# out of the image for a component the design deliberately made lightweight.
+fastembed>=0.7
+
+# Tracing. Every reasoning step, tool call, prompt and token lands here.
+mlflow>=3.0
+
+python-dotenv>=1.0

@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/api/client.ts","./src/components/Layout.tsx","./src/context/ClubContext.tsx","./src/pages/ChatPage.tsx","./src/pages/MatchDetailPage.tsx","./src/pages/MatchesPage.tsx","./src/pages/SeasonOverview.tsx"],"version":"5.7.3"}

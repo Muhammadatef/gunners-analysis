@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GunnersAnalysis — Architecture &amp; Operating Guide</title>
+
+<style>
+  :root {
+    --ground:      #E7EAE4;
+    --surface:     #F1F3EE;
+    --surface-2:   #DDE2DA;
+    --ink:         #131B17;
+    --ink-soft:    #33413A;
+    --muted:       #5B6862;
+    --rule:        #C6CDC3;
+    --accent:      #0B6E63;
+    --accent-soft: #D3E4E0;
+    --ok:          #3C7A46;
+    --warn:        #96690F;
+    --stop:        #9E3A2C;
+    --ok-bg:       #DCE8DC;
+    --warn-bg:     #EFE4CB;
+    --stop-bg:     #F0DBD6;
+
+    /* The tactics board is deliberately constant across themes: mermaid then
+       renders against one predictable ground instead of two. */
+    --board:       #0D1311;
+    --board-ink:   #DDE4DE;
+    --board-rule:  #2A3833;
+
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+
+    --measure: 68ch;
+    --pad: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0D1311;
+      --surface:     #151D19;
+      --surface-2:   #1E2823;
+      --ink:         #DDE4DE;
+      --ink-soft:    #B6C1BA;
+      --muted:       #8A968F;
+      --rule:        #2A3833;
+      --accent:      #33D6C0;
+      --accent-soft: #16302B;
+      --ok:          #7CBE85;
+      --warn:        #D6A954;
+      --stop:        #E08774;
+      --ok-bg:       #17281A;
+      --warn-bg:     #2E2413;
+      --stop-bg:     #301A16;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #0D1311;
+    --surface:     #151D19;
+    --surface-2:   #1E2823;
+    --ink:         #DDE4DE;
+    --ink-soft:    #B6C1BA;
+    --muted:       #8A968F;
+    --rule:        #2A3833;
+    --accent:      #33D6C0;
+    --accent-soft: #16302B;
+    --ok:          #7CBE85;
+    --warn:        #D6A954;
+    --stop:        #E08774;
+    --ok-bg:       #17281A;
+    --warn-bg:     #2E2413;
+    --stop-bg:     #301A16;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 var(--pad) 6rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--measure); margin: 0 auto; }
+  .wide { max-width: 78rem; margin: 0 auto; }
+
+  /* ---- type scale ---- */
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+  h1 {
+    font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+
+  h2 {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 750;
+  }
+
+  h3 {
+    font-size: 1.06rem;
+    letter-spacing: -0.005em;
+    font-weight: 700;
+  }
+
+  p { margin: 0; }
+  a { color: var(--accent); text-underline-offset: 0.18em; }
+  a:focus-visible,
+  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  strong { font-weight: 680; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .lede { font-size: 1.16rem; color: var(--ink-soft); }
+  .note { font-size: 0.93rem; color: var(--muted); }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.87em;
+    background: var(--surface-2);
+    padding: 0.1em 0.36em;
+    border-radius: 3px;
+  }
+
+  /* ---- rhythm: gap-driven, never per-element margins ---- */
+
+  header.masthead { display: flex; flex-direction: column; gap: 1.15rem; padding: 4.5rem 0 0; }
+  section { display: flex; flex-direction: column; gap: 1.15rem; }
+  main { display: flex; flex-direction: column; gap: 4.25rem; padding-top: 3rem; }
+  .stack { display: flex; flex-direction: column; gap: 0.9rem; }
+  .stack-tight { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .sec-head { display: flex; flex-direction: column; gap: 0.45rem; }
+
+  /* ---- masthead ---- */
+
+  .rule-top { height: 3px; background: var(--ink); }
+
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem;
+    font-family: var(--mono); font-size: 0.76rem;
+    color: var(--muted); font-variant-numeric: tabular-nums;
+    border-top: 1px solid var(--rule); padding-top: 0.9rem;
+  }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  .toc { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip {
+    font-family: var(--mono); font-size: 0.73rem; letter-spacing: 0.04em;
+    text-decoration: none; color: var(--ink-soft);
+    border: 1px solid var(--rule); border-radius: 100px;
+    padding: 0.24rem 0.7rem; background: var(--surface);
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---- tactics board (diagram bands) ---- */
+
+  .board {
+    background: var(--board);
+    color: var(--board-ink);
+    border-radius: 6px;
+    padding: 1.6rem 1.2rem 1.3rem;
+    overflow-x: auto;
+    border: 1px solid var(--board-rule);
+  }
+  .board .caption {
+    font-family: var(--mono); font-size: 0.71rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #7E8F88; padding-bottom: 1rem;
+  }
+  .board pre.mermaid { margin: 0; text-align: center; background: transparent; }
+
+  /* ---- code ---- */
+
+  pre.cmd {
+    font-family: var(--mono); font-size: 0.82rem; line-height: 1.7;
+    background: var(--surface); color: var(--ink);
+    border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    border-radius: 4px; padding: 0.9rem 1.1rem; margin: 0;
+    overflow-x: auto;
+  }
+  pre.cmd .c { color: var(--muted); }
+  pre.cmd .k { color: var(--accent); font-weight: 600; }
+
+  /* ---- numbered sequence (only where order is real) ---- */
+
+  ol.seq { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; counter-reset: step; }
+  ol.seq > li {
+    counter-increment: step;
+    display: grid; grid-template-columns: 2.4rem 1fr; gap: 0 1rem;
+    padding: 0.85rem 0; border-top: 1px solid var(--rule);
+  }
+  ol.seq > li:last-child { border-bottom: 1px solid var(--rule); }
+  ol.seq > li::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+    color: var(--accent); padding-top: 0.22rem;
+    font-variant-numeric: tabular-nums;
+  }
+  ol.seq .what { font-weight: 660; }
+  ol.seq .where { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+  ol.seq .why { font-size: 0.95rem; color: var(--ink-soft); }
+
+  /* ---- parallel tracks (not a sequence, so no numbers) ---- */
+
+  .tracks { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .track {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 5px;
+    padding: 1.05rem 1.15rem; display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .track h3 { font-size: 0.98rem; }
+  .track p { font-size: 0.92rem; color: var(--ink-soft); }
+
+  /* ---- tables ---- */
+
+  .twrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 5px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.88rem; background: var(--surface); }
+  th, td { text-align: left; padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); font-weight: 500;
+    background: var(--surface-2);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.num, th.num { font-variant-numeric: tabular-nums; text-align: right; }
+  td code { background: transparent; padding: 0; color: var(--ink); }
+
+  /* ---- status ---- */
+
+  .pill {
+    display: inline-block; font-family: var(--mono); font-size: 0.68rem;
+    letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+    padding: 0.14rem 0.5rem; border-radius: 3px; white-space: nowrap;
+  }
+  .pill.ok   { background: var(--ok-bg);   color: var(--ok); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn); }
+  .pill.stop { background: var(--stop-bg); color: var(--stop); }
+
+  .flag {
+    border-left: 3px solid var(--warn); background: var(--surface);
+    padding: 0.85rem 1.1rem; border-radius: 0 4px 4px 0;
+    display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.94rem;
+  }
+  .flag.stop { border-left-color: var(--stop); }
+  .flag .eyebrow { color: var(--warn); }
+  .flag.stop .eyebrow { color: var(--stop); }
+
+  ul.plain { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  ul.plain li { font-size: 0.95rem; color: var(--ink-soft); }
+
+  footer {
+    border-top: 1px solid var(--rule); padding-top: 1.2rem;
+    font-size: 0.85rem; color: var(--muted);
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+<style>
+  /* The artifact host ships a reset; a standalone file needs its own. */
+  html { -webkit-text-size-adjust: 100%; }
+  img, svg { max-width: 100%; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="rule-top"></div>
+    <div class="eyebrow">GunnersAnalysis · football intelligence platform</div>
+    <h1>Architecture, and how to actually run it</h1>
+    <p class="lede">
+      A Premier League event-data pipeline with an analyst on top of it. The pipeline
+      turns two match URLs into a warehouse row and eighteen rendered panels. The
+      analyst answers questions about what it collected, and is built so that it
+      cannot invent a statistic.
+    </p>
+    <nav class="toc" aria-label="Sections">
+      <a class="chip" href="#shape">01 Shape</a>
+      <a class="chip" href="#stages">02 Collection</a>
+      <a class="chip" href="#agent">03 Interpretation</a>
+      <a class="chip" href="#start">04 Start the stack</a>
+      <a class="chip" href="#tracks">05 Three ways in</a>
+      <a class="chip" href="#ask">06 The analyst</a>
+      <a class="chip" href="#state">07 Honest state</a>
+      <a class="chip" href="#ref">08 Reference</a>
+    </nav>
+    <div class="meta">
+      <span>as of <b>2026-08-08</b></span>
+      <span>branch <b>main</b> @ <b>a8f34dd</b></span>
+      <span><b>530</b> unit tests</span>
+      <span><b>38</b> matches loaded</span>
+      <span><b>55,130</b> events</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================ -->
+    <section id="shape">
+      <div class="sec-head">
+        <div class="eyebrow">01 · the shape of it</div>
+        <h2>Two halves that meet in Postgres</h2>
+      </div>
+      <p>
+        Everything before Postgres is <strong>collection</strong>: scrape a match, align it
+        with a second source, check it, render it, load it. Everything after Postgres is
+        <strong>interpretation</strong>: derive the tactical layer Opta never records, write
+        it up as prose, embed it, and answer questions against it.
+      </p>
+      <p>
+        The database is the seam. Numbers only ever cross it in one direction, which is
+        what makes the analyst's central guarantee possible: every figure in an answer
+        traces back to a query that returned it.
+      </p>
+    </section>
+
+    <div class="wide">
+      <div class="board">
+        <div class="caption">System overview — sources, stages, storage, analyst</div>
+<pre class="mermaid">
+%%{init: {'theme':'dark','themeVariables':{'fontFamily':'ui-monospace, Menlo, Consolas, monospace','fontSize':'13px','primaryColor':'#16302B','primaryTextColor':'#DDE4DE','primaryBorderColor':'#33D6C0','lineColor':'#5E706A','clusterBkg':'#131B18','clusterBorder':'#2A3833','background':'#0D1311'}}}%%
+flowchart TB
+    WS(["whoscored.com<br/>Opta event stream"])
+    SS(["sofascore.com<br/>xG / xGOT"])
+
+    subgraph collect["COLLECTION — orchestrator/pipeline.py"]
+      direction LR
+      SC["scrape"] --> TR["transform"] --> EN["enrich"] --> VA["validate"] --> RE["render"] --> LO["load"]
+    end
+
+    subgraph entry["ENTRY POINTS"]
+      direction LR
+      DAG["38 fixture DAGs<br/>Airflow"]
+      CLI["run_match.py<br/>two links, any club"]
+      API["POST /pipeline/run<br/>FastAPI :8000"]
+    end
+
+    PG[("Postgres<br/>one schema per club")]
+    OUT[("output/[club]/season/match/<br/>18 panels + dashboard")]
+
+    subgraph analyst["INTERPRETATION — agent/"]
+      direction LR
+      AN["analytics/<br/>possessions · pressing · carries"] --> DOC["semantic documents"] --> VEC[("pgvector<br/>4,349 docs")]
+    end
+
+    AGENT["DSPy agent<br/>route · gather · answer · check"]
+    ANS(["grounded answer<br/>+ provenance"])
+    ML[["MLflow :5000<br/>every step traced"]]
+
+    WS -.-> SC
+    SS -.-> EN
+    DAG --> collect
+    CLI --> collect
+    API --> collect
+    RE --> OUT
+    LO --> PG
+    PG --> AN
+    PG --> AGENT
+    VEC --> AGENT
+    AGENT --> ANS
+    AGENT -.-> ML
+</pre>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <section id="stages">
+      <div class="sec-head">
+        <div class="eyebrow">02 · collection</div>
+        <h2>Seven stages, in this order</h2>
+      </div>
+      <p>
+        Order matters here, so it is numbered. Each stage is a plain function in
+        <code>orchestrator/pipeline.py</code>, which is why a DAG task, an HTTP request and a
+        CLI run all execute identical code rather than three drifting copies.
+      </p>
+
+      <ol class="seq">
+        <li>
+          <div class="stack-tight">
+            <span class="what">Resolve</span>
+            <span class="where">scraper/fixtures.py</span>
+            <span class="why">Turn a calendar slug into a real WhoScored match id. Ids are only minted a few weeks before kick-off, so the calendar stores the slug and this looks it up when the time comes.</span>
+          </div>
+        </li>
+        <li>
+          <div class="stack-tight">
+            <span class="what">Scrape</span>
+            <span class="where">scraper/scraper.py</span>
+            <span class="why">A real Chrome session — headed on a desktop, Xvfb in a container, headless only as a last resort — pulls the match centre page and waits for the event payload rather than sleeping a fixed interval.</span>
+          </div>
+        </li>
+        <li>
+          <div class="stack-tight">
+            <span class="what">Transform</span>
+            <span class="where">transformer/transform.py</span>
+            <span class="why">The embedded JSON becomes events, players and metadata. Competition and team colours are set here, so a non-English club is not silently labelled Premier League or painted in Arsenal red.</span>
+          </div>
+        </li>
+        <li>
+          <div class="stack-tight">
+            <span class="what">Enrich</span>
+            <span class="where">scraper/sofascore.py</span>
+            <span class="why">xG and xGOT come from the second source. Before anything is written, the two feeds' home and away sides are compared — a mispasted link produces a refusal, not confident wrong numbers.</span>
+          </div>
+        </li>
+        <li>
+          <div class="stack-tight">
+            <span class="what">Validate</span>
+            <span class="where">quality/checks.py</span>
+            <span class="why">Thirteen checks, and a hard gate: event count in range, full ninety minutes covered, eleven starters a side. A match that fails does not reach the warehouse.</span>
+          </div>
+        </li>
+        <li>
+          <div class="stack-tight">
+            <span class="what">Render</span>
+            <span class="where">visualizer/match_report.py</span>
+            <span class="why">Eighteen panels plus a unified dashboard, into <code>output/[club]/season/match/</code>, with a season index and a <code>_latest</code> pointer maintained per club.</span>
+          </div>
+        </li>
+        <li>
+          <div class="stack-tight">
+            <span class="what">Load</span>
+            <span class="where">db/loader.py</span>
+            <span class="why">Upserts into that club's schema. Re-running the same job replaces its child rows rather than duplicating them, so a retry is safe.</span>
+          </div>
+        </li>
+      </ol>
+
+      <div class="flag">
+        <div class="eyebrow">one club, one schema</div>
+        <p>
+          Nothing in the codebase writes schema-qualified SQL. The schema is chosen once per
+          connection via <code>search_path</code>, so Arsenal stays in <code>gunners</code> and
+          <code>--club barcelona</code> gets a full clone of the same DDL. Pass the club; never
+          hand-edit a table name.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <section id="agent">
+      <div class="sec-head">
+        <div class="eyebrow">03 · interpretation</div>
+        <h2>Why the analyst cannot invent a number</h2>
+      </div>
+      <p>
+        This is architecture, not an instruction in a prompt. Three mechanisms, all
+        mechanical, and a fourth rule that is measured rather than hoped for.
+      </p>
+      <ul class="plain">
+        <li><strong>It never writes SQL.</strong> It picks an id from a registry of 17 allowlisted, parameterised queries and supplies the arguments. The worst mistake available is choosing the wrong query — a routing error the evaluation measures.</li>
+        <li><strong>It never does arithmetic.</strong> Ratios and differences go through a calculator that walks the expression's syntax tree. No names, no attributes, no imports exist to it.</li>
+        <li><strong>Every number is checked before the answer is returned.</strong> Each figure in the draft is matched against the set the evidence actually vouched for; anything unmatched is reported as <code>unsupported_numbers</code>.</li>
+        <li><strong>It refuses rather than guesses.</strong> Injuries, transfer fees, other clubs' players, next season, per-shot xG — the evaluation set contains questions whose only correct answer is a refusal, scored separately.</li>
+      </ul>
+    </section>
+
+    <div class="wide">
+      <div class="board">
+        <div class="caption">One question, end to end</div>
+<pre class="mermaid">
+%%{init: {'theme':'dark','themeVariables':{'fontFamily':'ui-monospace, Menlo, Consolas, monospace','fontSize':'13px','primaryColor':'#16302B','primaryTextColor':'#DDE4DE','primaryBorderColor':'#33D6C0','lineColor':'#5E706A','clusterBkg':'#131B18','clusterBorder':'#2A3833','background':'#0D1311'}}}%%
+flowchart LR
+    Q(["question"]) --> IC["IntentClassifier<br/><i>sql · retrieval · none</i>"]
+
+    IC -->|sql| SQL["allowlisted query<br/>17 in the registry"]
+    IC -->|retrieval| VEC["pgvector search<br/>+ metadata filters"]
+    IC -->|none| REF(["refusal"])
+
+    SQL --> EV["evidence<br/>+ the set of numbers it vouches for"]
+    VEC --> EV
+    SQL -.->|bad id or<br/>missing param| VEC
+
+    EV --> MA["MatchAnalyst<br/><i>answer from evidence only</i>"]
+    MA --> CHK{"every number<br/>in the evidence?"}
+    CHK -->|yes| OK(["answer + provenance"])
+    CHK -->|no| FLAG(["answer + unsupported_numbers"])
+</pre>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <section id="start">
+      <div class="sec-head">
+        <div class="eyebrow">04 · getting started</div>
+        <h2>Bring the stack up</h2>
+      </div>
+      <p>
+        Six services: Postgres with pgvector, Airflow and its own metadata database,
+        Redis, the FastAPI orchestrator, and MLflow. Both application containers
+        bind-mount the repository, so ordinary code changes need no rebuild.
+      </p>
+<pre class="cmd"><span class="k">make up</span>        <span class="c"># start everything</span>
+<span class="k">make health</span>    <span class="c"># orchestrator responding?</span>
+<span class="k">make ps</span>        <span class="c"># service status</span>
+<span class="k">make schema</span>    <span class="c"># apply the DDL to the gunners schema (idempotent)</span></pre>
+      <div class="twrap">
+        <table>
+          <thead>
+            <tr><th>Interface</th><th>Where</th><th>For</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Airflow</td><td><code>localhost:8080</code></td><td>the season's 38 fixture DAGs</td></tr>
+            <tr><td>Pipeline API</td><td><code>localhost:8000/docs</code></td><td>ad-hoc runs, job status</td></tr>
+            <tr><td>MLflow</td><td><code>localhost:5000</code></td><td>every agent reasoning step, every eval run</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <section id="tracks">
+      <div class="sec-head">
+        <div class="eyebrow">05 · three ways in</div>
+        <h2>Pick the path that matches the job</h2>
+      </div>
+      <p>
+        These are parallel routes into the same seven stages, not steps in a sequence.
+        Choose by what you have: a scheduled fixture, a single match you want to watch
+        run, or a whole season already played.
+      </p>
+
+      <div class="tracks">
+        <div class="track">
+          <div class="eyebrow">automatic</div>
+          <h3>A scheduled Arsenal fixture</h3>
+          <p>
+            One DAG per fixture, firing <strong>2h25 after kick-off</strong> — the match plus
+            stoppage, plus thirty minutes for the feed to settle. Nothing to run.
+          </p>
+        </div>
+        <div class="track">
+          <div class="eyebrow">manual</div>
+          <h3>One match, any club</h3>
+          <p>
+            Two links in, one match out. This is the entry point for Barcelona, a Champions
+            League tie, Al&nbsp;Ahly — anything outside the Arsenal calendar.
+          </p>
+        </div>
+        <div class="track">
+          <div class="eyebrow">bulk</div>
+          <h3>A season already played</h3>
+          <p>
+            Derive the calendar from SofaScore, then ingest match by match. Resumable:
+            re-run after any failure and it picks up where it stopped.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="one-match">
+      <div class="sec-head">
+        <div class="eyebrow">05a</div>
+        <h2>One match, from two links</h2>
+      </div>
+      <p>
+        <code>--club</code> chooses the Postgres schema and the output directory, and is
+        validated before anything is scraped so a typo fails in a second rather than after
+        a page load. The SofaScore link is required unless you explicitly pass
+        <code>--no-xg</code> — rendering a report with placeholder zeros is worse than an error.
+      </p>
+<pre class="cmd"><span class="k">make match</span> CLUB=barcelona \
+  WS='https://www.whoscored.com/matches/&lt;id&gt;/live/&lt;slug&gt;' \
+  SS='https://www.sofascore.com/football/match/&lt;slug&gt;/&lt;id&gt;' \
+  COMP='Champions League' MW=6
+
+<span class="c"># or directly, for the full set of flags</span>
+python orchestrator/run_match.py --club barcelona \
+  --whoscored '&lt;url&gt;' --sofascore '&lt;url&gt;' \
+  --season '2025/2026' --competition 'Champions League' \
+  --home-color '#A50044' --away-color '#FEBE10'</pre>
+      <p class="note">
+        Prints the job id, the schema, the match directory, the xG source and the final
+        line. Exits non-zero on failure, so it composes into a shell script.
+      </p>
+    </section>
+
+    <section id="season">
+      <div class="sec-head">
+        <div class="eyebrow">05b</div>
+        <h2>A whole finished season</h2>
+      </div>
+<pre class="cmd"><span class="k">make calendar</span> BACKFILL_SEASON='2025/2026'   <span class="c"># derive it from SofaScore</span>
+<span class="k">make backfill-plan</span>                          <span class="c"># what would run, touching nothing</span>
+<span class="k">make backfill</span>                               <span class="c"># ~40 min for 38 matches, resumable</span>
+<span class="k">make readiness</span>                              <span class="c"># enough history to analyse?</span></pre>
+      <p class="note">
+        <code>make backfill-plan</code> first, always. It is the difference between finding a
+        wrong season string in two seconds and finding it forty minutes in.
+      </p>
+    </section>
+
+    <!-- ============================================ -->
+    <section id="ask">
+      <div class="sec-head">
+        <div class="eyebrow">06 · the analyst</div>
+        <h2>Asking it things</h2>
+      </div>
+      <p>
+        Build the layer once — derived tactical tables, the document corpus and its
+        embeddings, the evaluation set — then ask. Both commands need
+        <code>LOCAL=1</code>, and the reason is worth knowing.
+      </p>
+
+      <div class="flag stop">
+        <div class="eyebrow">the analyst runs on the host, not in a container</div>
+        <p>
+          Its dependencies cannot be installed into the Airflow image: the agent's ORM needs
+          SQLAlchemy&nbsp;2, Airflow&nbsp;2.10 forbids it, and pip resolves that conflict with a
+          warning and a successful build that then cannot load Airflow's own data model.
+          <code>LOCAL=1</code> runs against the project virtualenv, which has no Airflow in it
+          and therefore no conflict.
+        </p>
+      </div>
+
+<pre class="cmd"><span class="c"># the compose default points at the container hostname; override it on the host</span>
+export GUNNERS_DB_URL='postgresql://gunners:&lt;password&gt;@localhost:5432/gunners'
+
+<span class="k">LOCAL=1 make agent-setup</span>   <span class="c"># tactical tables, documents, eval set, gates</span>
+
+<span class="k">LOCAL=1 make ask</span> Q="Was Arsenal a high-pressing side in 2025/26?"
+<span class="k">LOCAL=1 make ask</span> Q="How many points did Arsenal take in 2025/26?"</pre>
+
+      <p>That second question returns:</p>
+<pre class="cmd">Arsenal finished the 2025/2026 season with 85 points.
+
+route      sql -&gt; season_summary{'team': 'Arsenal', 'season': '2025/2026'}
+tools      sql
+latency    27.5s
+unsupported  none — every figure traces to the evidence</pre>
+      <p class="note">
+        The last line is the point of the whole design. Read it every time.
+      </p>
+    </section>
+
+    <section id="measure">
+      <div class="sec-head">
+        <div class="eyebrow">06a</div>
+        <h2>Measuring it</h2>
+      </div>
+      <p>
+        130 questions across 18 families, split by family rather than at random — a random
+        split would put “how many goals did Saka score” in training and the same question
+        about Rice in test, and reward memorisation. Three model tiers, and which one you
+        are on matters more than anything else in the configuration.
+      </p>
+      <div class="twrap">
+        <table>
+          <thead>
+            <tr><th>Tier</th><th>Model</th><th class="num">$ / 1M in · out</th><th>Use it for</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>wiring</code></td><td>gpt-oss-20b:free</td><td class="num">0 · 0</td><td>plumbing and smoke tests only</td></tr>
+            <tr><td><code>cheap</code></td><td>gpt-oss-20b</td><td class="num">0.03 · 0.13</td><td>evaluation and optimizer runs</td></tr>
+            <tr><td><code>quality</code></td><td>claude-sonnet-4.5</td><td class="num">3 · 15</td><td>answers you intend to act on</td></tr>
+          </tbody>
+        </table>
+      </div>
+<pre class="cmd"><span class="k">LOCAL=1 make eval</span> SPLIT=dev  TIER=wiring   <span class="c"># free; proves the wiring, not the quality</span>
+<span class="k">LOCAL=1 make eval</span> SPLIT=test TIER=cheap    <span class="c"># the held-out split, ~$0.002</span>
+<span class="c"># traces and run history: http://localhost:5000</span></pre>
+      <div class="flag">
+        <div class="eyebrow">a free-tier score is not a regression check</div>
+        <p>
+          A call that never reached a model is scored as a wrong answer, exactly like a
+          hallucination. A dev run on the free tier scored <strong>0.111</strong> with 15 of 18
+          questions rate-limited before they got anywhere — against a recorded baseline of
+          0.891 on the same split. Use <code>cheap</code> for anything you intend to compare.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <section id="state">
+      <div class="sec-head">
+        <div class="eyebrow">07 · honest state</div>
+        <h2>What works, and what does not</h2>
+      </div>
+      <div class="twrap">
+        <table>
+          <thead>
+            <tr><th>Capability</th><th>State</th><th>Detail</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Match pipeline, end to end</td>
+              <td><span class="pill ok">proven</span></td>
+              <td>38 of 38 matches ingested; every score independently verified against a source the pipeline never touches</td>
+            </tr>
+            <tr>
+              <td>xG / xGOT alignment</td>
+              <td><span class="pill ok">proven</span></td>
+              <td>all 38 from SofaScore, none on a placeholder</td>
+            </tr>
+            <tr>
+              <td>Manual two-link run, any club</td>
+              <td><span class="pill ok">working</span></td>
+              <td>own schema and output tree per club</td>
+            </tr>
+            <tr>
+              <td>Analyst, from the host</td>
+              <td><span class="pill ok">working</span></td>
+              <td>routing, retrieval, the number check, MLflow tracing</td>
+            </tr>
+            <tr>
+              <td>The 38 fixture DAGs</td>
+              <td><span class="pill warn">untested live</span></td>
+              <td>every stage has 38 real runs behind it; the scheduling wrapper has never fired. First live test is matchweek 1</td>
+            </tr>
+            <tr>
+              <td>The 3 agent DAGs</td>
+              <td><span class="pill stop">blocked</span></td>
+              <td>SQLAlchemy 2 vs Airflow 2.10; all three are paused. Corpus refresh is manual until they get a separate interpreter</td>
+            </tr>
+            <tr>
+              <td>Per-shot xG</td>
+              <td><span class="pill stop">absent</span></td>
+              <td>match-level only; “which chance was best” is a question the agent must refuse, and that refusal is measured</td>
+            </tr>
+            <tr>
+              <td>Alerting</td>
+              <td><span class="pill stop">none</span></td>
+              <td>a DAG failing at 23:00 on a Saturday tells nobody</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        Two more worth carrying in your head: the weekly evaluation DAG fails below a floor
+        of 0.50 while the measured held-out score is 0.517 — three percent of headroom — and
+        the warehouse holds only Arsenal's matches, so cross-club player comparisons are
+        refusals rather than answers.
+      </p>
+    </section>
+
+    <!-- ============================================ -->
+    <section id="ref">
+      <div class="sec-head">
+        <div class="eyebrow">08 · reference</div>
+        <h2>Commands, in one place</h2>
+      </div>
+      <div class="twrap">
+        <table>
+          <thead>
+            <tr><th>Command</th><th>Does</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>make up</code> · <code>down</code> · <code>ps</code> · <code>health</code></td><td>the stack; the warehouse volume survives a <code>down</code></td></tr>
+            <tr><td><code>make build</code></td><td>rebuild images — needed only for dependency changes</td></tr>
+            <tr><td><code>make schema</code></td><td>apply the DDL to <code>gunners</code>, idempotent</td></tr>
+            <tr><td><code>make schema-club CLUB=…</code></td><td>provision another club's schema</td></tr>
+            <tr><td><code>make match CLUB=… WS=… SS=…</code></td><td>one match, two links, full pipeline</td></tr>
+            <tr><td><code>make calendar</code> → <code>backfill-plan</code> → <code>backfill</code></td><td>a whole finished season</td></tr>
+            <tr><td><code>make season</code> · <code>table</code> · <code>players</code></td><td>read the warehouse: fixtures, league table, per-90s</td></tr>
+            <tr><td><code>LOCAL=1 make agent-setup</code></td><td>tactical tables, documents, embeddings, eval set</td></tr>
+            <tr><td><code>LOCAL=1 make ask Q="…"</code></td><td>ask a question</td></tr>
+            <tr><td><code>LOCAL=1 make eval SPLIT=… TIER=…</code></td><td>measure it</td></tr>
+            <tr><td><code>make test</code></td><td>530 unit tests</td></tr>
+            <tr><td><code>make clean</code></td><td>delete derived files under <code>data/</code> — <em>every club's</em></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        The analyst targets are not yet listed in <code>make help</code> or
+        <code>COMMANDS.md</code>; this table and <code>docs/AGENT.md</code> are the current
+        reference for them.
+      </p>
+    </section>
+
+    <footer>
+      <div>
+        Deeper detail lives in the repository: <code>docs/ARCHITECTURE.md</code> for services
+        and data flow, <code>docs/AGENT.md</code> for the analyst, <code>docs/MULTI_CLUB.md</code>
+        for schemas and the two-link run, <code>STATUS.md</code> for current state and open items.
+      </div>
+      <div>Every figure on this page was read from the running system or the warehouse, not remembered.</div>
+    </footer>
+
+  </main>
+</div>
+
+<script type="module">
+  // Rendered natively when published as an artifact; loaded explicitly here so
+  // the file also works opened straight off disk.
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
+</script>
+</body>
+</html>

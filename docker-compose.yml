@@ -1,0 +1,240 @@
+services:
+  # ------------------------------------------------------------------
+  # Season warehouse
+  # ------------------------------------------------------------------
+  postgres:
+    # pgvector rather than plain postgres: the analyst layer stores its
+    # semantic documents and their embeddings beside the events that generated
+    # them, so metadata filtering and similarity search happen in one query
+    # instead of in a second datastore that can drift.
+    #
+    # Note the volume is `pgvecdata`, not the old `pgdata`. This image is
+    # Debian where the previous one was Alpine, and the libc change alters text
+    # collation - reusing the old data directory in place risks silently
+    # mis-ordered text indexes. The database is small, so it was dumped and
+    # restored into a fresh volume instead. `pgdata` is left untouched as the
+    # rollback and can be deleted once you are happy.
+    image: pgvector/pgvector:pg16
+    container_name: gunners-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-gunners}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gunners}
+      POSTGRES_DB: ${POSTGRES_DB:-gunners}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgvecdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/10_schema.sql:ro
+      - ./db/schema_agent.sql:/docker-entrypoint-initdb.d/11_agent.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-gunners} -d ${POSTGRES_DB:-gunners}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [gunners-net]
+
+  # ------------------------------------------------------------------
+  # Analyst observability
+  # ------------------------------------------------------------------
+  # Every reasoning step the agent takes is traced here: intent, tool calls,
+  # SQL, retrieved documents, prompts, responses, tokens, cost, latency. An
+  # agent you cannot inspect is one you cannot trust, and the eval runs are
+  # only comparable because they all land in the same place.
+  mlflow:
+    # Keep in lockstep with agent/requirements.txt (mlflow>=3). A 2.x UI
+    # against a 3.x client produces traces that open with
+    # `can't access property "span_id", e.context is undefined`.
+    image: ghcr.io/mlflow/mlflow:v3.15.1
+    container_name: gunners-mlflow
+    # --serve-artifacts makes the server proxy artifact and trace uploads.
+    # Without it the client is handed the server's own filesystem path and
+    # tries to write /mlflow itself, which fails with a permission error on
+    # every trace -- runs still record their metrics, so the failure is quiet
+    # and you lose exactly the reasoning traces you stood MLflow up for.
+    # MLflow 3.5+ enables Host/CORS middleware. Without --allowed-hosts the
+    # published port accepts TCP then resets — traces never open from the host.
+    command: >
+      mlflow server --host 0.0.0.0 --port 5000
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --serve-artifacts --artifacts-destination /mlflow/artifacts
+      --allowed-hosts "localhost,127.0.0.1,localhost:5000,127.0.0.1:5000,*"
+      --cors-allowed-origins "http://localhost:5000,http://127.0.0.1:5000"
+    ports:
+      - "${MLFLOW_PORT:-5000}:5000"
+    volumes:
+      - mlflowdata:/mlflow
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:5000/health', timeout=5).status==200 else 1)\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks: [gunners-net]
+
+  # Airflow's own metadata database, kept separate from the analytics one.
+  airflow-db:
+    image: postgres:16-alpine
+    container_name: gunners-airflow-db
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - airflowdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [gunners-net]
+
+  redis:
+    image: redis:7-alpine
+    container_name: gunners-redis
+    networks: [gunners-net]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ------------------------------------------------------------------
+  # Orchestration
+  # ------------------------------------------------------------------
+  orchestrator:
+    build:
+      context: .
+      dockerfile: orchestrator/Dockerfile
+    container_name: gunners-orchestrator
+    ports:
+      - "8000:8000"
+    environment:
+      REDIS_URL: redis://redis:6379
+      GUNNERS_ROOT: /opt/gunners
+      # Containers have no X server. xvfb still runs a real Chrome with a
+      # real renderer - only the display is virtual - which is what keeps
+      # the fingerprint out of headless territory.
+      GUNNERS_BROWSER_MODE: "${GUNNERS_BROWSER_MODE:-xvfb}"
+      # WhoScored rolls the season/stage ids every August. Set this in .env
+      # when the pinned grid in scraper/fixtures.py ages out.
+      GUNNERS_WHOSCORED_PL_FIXTURES_URL: "${GUNNERS_WHOSCORED_PL_FIXTURES_URL:-}"
+      GUNNERS_DB_URL: postgresql://${POSTGRES_USER:-gunners}:${POSTGRES_PASSWORD:-gunners}@postgres:5432/${POSTGRES_DB:-gunners}
+    volumes:
+      - .:/opt/gunners
+    depends_on:
+      redis: {condition: service_healthy}
+      postgres: {condition: service_healthy}
+    networks: [gunners-net]
+    command: ["uvicorn", "orchestrator.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health', timeout=5).status==200 else 1)\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  airflow:
+    build:
+      context: .
+      dockerfile: airflow/Dockerfile
+    container_name: gunners-airflow
+    ports:
+      # Host port is configurable: 8080 is a popular address, and another
+      # project's Airflow holding it should not stop this one from starting.
+      - "${AIRFLOW_PORT:-8080}:8080"
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow-db:5432/airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/gunners/airflow/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DEFAULT_TIMEZONE: Europe/London
+      # `standalone` kills the webserver if gunicorn's master does not answer in
+      # time. The default is 120s; a cold boot parsing 38 fixture DAGs has been
+      # measured at ~100s, which is too little margin. 300s removes the race.
+      AIRFLOW__WEBSERVER__WEB_SERVER_MASTER_TIMEOUT: "300"
+      AIRFLOW__WEBSERVER__WEB_SERVER_WORKER_TIMEOUT: "300"
+      GUNNERS_ROOT: /opt/gunners
+      GUNNERS_DB_URL: postgresql://${POSTGRES_USER:-gunners}:${POSTGRES_PASSWORD:-gunners}@postgres:5432/${POSTGRES_DB:-gunners}
+      # Fixture DAGs fire this long after the final whistle, which is itself
+      # derived as kick-off + MATCH_DURATION_MINUTES.
+      POST_MATCH_DELAY_MINUTES: "${POST_MATCH_DELAY_MINUTES:-30}"
+      MATCH_DURATION_MINUTES: "${MATCH_DURATION_MINUTES:-115}"
+      # How long await_final_whistle waits out a kick-off the calendar guessed
+      # wrong. 24 x 15 min covers most of an afternoon.
+      WHISTLE_RETRIES: "${WHISTLE_RETRIES:-24}"
+      WHISTLE_RETRY_DELAY_MINUTES: "${WHISTLE_RETRY_DELAY_MINUTES:-15}"
+      GUNNERS_BROWSER_MODE: "${GUNNERS_BROWSER_MODE:-xvfb}"
+      GUNNERS_WHOSCORED_PL_FIXTURES_URL: "${GUNNERS_WHOSCORED_PL_FIXTURES_URL:-}"
+      GUNNERS_REPORT_OPTIONAL: "${GUNNERS_REPORT_OPTIONAL:-}"
+      AIRFLOW_UID: "${AIRFLOW_UID:-50000}"
+      _AIRFLOW_WWW_USER_USERNAME: ${AIRFLOW_USER:-admin}
+      _AIRFLOW_WWW_USER_PASSWORD: ${AIRFLOW_PASSWORD:-admin}
+      ANALYST_URL: ${ANALYST_URL:-http://analyst:8100}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+    volumes:
+      - .:/opt/gunners
+      - airflowlogs:/opt/airflow/logs
+    depends_on:
+      airflow-db: {condition: service_healthy}
+      postgres: {condition: service_healthy}
+      analyst: {condition: service_healthy}
+    networks: [gunners-net]
+    # `standalone` runs the API server and the scheduler in one container,
+    # which is all a single-team season pipeline needs.
+    command: ["standalone"]
+    # Without this, a dead webserver looks healthy: the container stays Up, the
+    # port stays bound, and `airflow dags list` keeps working because it talks
+    # to the metadata DB rather than the UI. That hid an outage for a day.
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      # A cold boot takes ~6 min: the webserver imports every bundled provider,
+      # and the Azure package alone emits tens of thousands of SyntaxWarnings.
+      # Anything shorter and the container reports unhealthy on every restart.
+      start_period: 420s
+
+  # ------------------------------------------------------------------
+  # Analyst — DSPy agent over HTTP (SQLAlchemy 2 safe; no Airflow)
+  # ------------------------------------------------------------------
+  analyst:
+    build:
+      context: .
+      dockerfile: analyst/Dockerfile
+    container_name: gunners-analyst
+    ports:
+      - "${ANALYST_PORT:-8100}:8100"
+    environment:
+      GUNNERS_ROOT: /opt/gunners
+      GUNNERS_DB_URL: postgresql://${POSTGRES_USER:-gunners}:${POSTGRES_PASSWORD:-gunners}@postgres:5432/${POSTGRES_DB:-gunners}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      GUNNERS_LM_TIER: ${GUNNERS_LM_TIER:-cheap}
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+      ANALYST_CORS_ORIGINS: ${ANALYST_CORS_ORIGINS:-http://localhost:8000,http://127.0.0.1:8000,http://localhost:5173,http://127.0.0.1:5173}
+    volumes:
+      - .:/opt/gunners
+    depends_on:
+      postgres: {condition: service_healthy}
+      mlflow: {condition: service_healthy}
+    networks: [gunners-net]
+    command: ["uvicorn", "analyst.api:app", "--host", "0.0.0.0", "--port", "8100"]
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8100/health', timeout=5).status==200 else 1)\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+volumes:
+  # The live warehouse. `pgdata` is the pre-pgvector Alpine volume, kept as a
+  # rollback after the dump-and-restore migration; nothing writes to it now.
+  pgvecdata:
+  pgdata:
+  airflowdata:
+  airflowlogs:
+  mlflowdata:
+
+networks:
+  gunners-net:
+    driver: bridge

@@ -1,0 +1,16 @@
+# Keep Docker build context small — output/ and web deps are huge and bind-mounted.
+output/
+web/node_modules/
+web/dist/
+**/__pycache__/
+**/.pytest_cache/
+**/.git/
+**/.venv/
+**/venv/
+htmlcov/
+*.pyc
+.env
+data/raw/
+data/processed/
+data/visualizations/
+airflow/logs/

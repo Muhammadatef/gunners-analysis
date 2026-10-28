@@ -1,0 +1,4 @@
+pandas==2.2.0
+numpy==1.26.0
+pydantic==2.8.0
+requests==2.32.0

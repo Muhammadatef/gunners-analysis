@@ -1,0 +1,42 @@
+# Analytics + pipeline dependencies layered on top of the Airflow base image.
+pandas>=2.2
+numpy>=1.26
+scipy>=1.11
+matplotlib>=3.8
+seaborn>=0.13
+mplsoccer>=1.4
+highlight-text>=0.2
+Pillow>=10.0
+selenium>=4.20
+webdriver-manager>=4.0
+# Starts the Xvfb display in-process for GUNNERS_BROWSER_MODE=xvfb.
+pyvirtualdisplay>=3.0
+psycopg2-binary>=2.9
+requests>=2.31
+# quality/validate.py re-exports the pandera schemas from validate_strict.py;
+# the DAGs only need quality/checks.py, but the CLI wrapper imports both.
+pandera>=0.19
+
+# --- the analyst layer: deliberately NOT here --------------------------------
+# agent_maintenance_dag.py ships three DAGs whose tasks import `agent.*`, which
+# needs dspy, optuna, pgvector, sqlalchemy, fastembed and mlflow. None of them
+# are installed anywhere - agent/requirements.txt is referenced by no Dockerfile
+# and no compose file - so those three DAGs cannot currently run. Adding them
+# here is the obvious fix and it does not work:
+#
+#     agent/models.py needs SQLAlchemy >= 2.0 (DeclarativeBase, Mapped,
+#     mapped_column). Airflow 2.10.4 pins SQLAlchemy < 2.0. pip resolves the
+#     conflict by installing 2.0.51, prints it as a warning, and exits 0 - and
+#     the resulting image imports `airflow` fine but cannot load its own ORM:
+#
+#         from airflow.models import TaskInstance
+#         -> MappedAnnotationError: Type annotation for
+#            "TaskInstance.dag_model" can't be correctly interpreted
+#
+# That takes down the scheduler and all 39 fixture DAGs, not just the three.
+# Measured on 2026-08-08 against a real build; see STATUS.md open item 9.
+#
+# The two versions have to be kept in separate interpreters. Until that is
+# built, the agent runs from the analyst container / host venv. Fixture DAGs
+# call `POST /report` on ANALYST_URL for football_analyst_DSPy_agent_match_report
+# — no dspy in this image.

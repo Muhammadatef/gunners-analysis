@@ -1,0 +1,2572 @@
+[
+  {
+    "id": "stat-match_score-2025-08-17",
+    "question": "What was the score when Arsenal played Man Utd on 2025-08-17?",
+    "answer": "Man Utd 0-1 Arsenal",
+    "answer_value": [
+      1,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Man Utd",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Man Utd 0-1 Arsenal on 2025-08-17"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-david-raya",
+    "question": "How many goals did David Raya score in 2025/2026?",
+    "answer": "0 goals",
+    "answer_value": 0,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "David Raya",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'David Raya', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 37, 'minutes': 3573, 'goals': 0, 'assists': 0, 'shots': 0, 'key_passes': 3, 'progressive_passes': 9, 'passes': 1275, 'passes_accurate': 882, 'tackles': 1, 'interceptions': 1, 'ball_recoveries': 53, 'total_xt': Decimal('2.451'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.00'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('0.23'), 'xt_per_90': Decimal('0.062')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_assists-noni-madueke",
+    "question": "How many assists did Noni Madueke provide in 2025/2026?",
+    "answer": "1 assists",
+    "answer_value": 1,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Noni Madueke",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Noni Madueke', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 16, 'minutes': 1299, 'goals': 3, 'assists': 1, 'shots': 26, 'key_passes': 22, 'progressive_passes': 28, 'passes': 494, 'passes_accurate': 332, 'tackles': 42, 'interceptions': 5, 'ball_recoveries': 35, 'total_xt': Decimal('0.932'), 'avg_rating': Decimal('6.66'), 'goals_per_90': Decimal('0.21'), 'assists_per_90': Decimal('0.07'), 'prog_passes_per_90': Decimal('1.94'), 'xt_per_90': Decimal('0.065')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2026-02-07",
+    "question": "What was the score when Arsenal played Sunderland on 2026-02-07?",
+    "answer": "Arsenal 3-0 Sunderland",
+    "answer_value": [
+      3,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Sunderland",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 3-0 Sunderland on 2026-02-07"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_assists-bukayo-saka",
+    "question": "How many assists did Bukayo Saka provide in 2025/2026?",
+    "answer": "4 assists",
+    "answer_value": 4,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Bukayo Saka",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Bukayo Saka', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 25, 'minutes': 2388, 'goals': 7, 'assists': 4, 'shots': 71, 'key_passes': 61, 'progressive_passes': 81, 'passes': 907, 'passes_accurate': 645, 'tackles': 57, 'interceptions': 16, 'ball_recoveries': 117, 'total_xt': Decimal('4.288'), 'avg_rating': Decimal('7.25'), 'goals_per_90': Decimal('0.26'), 'assists_per_90': Decimal('0.15'), 'prog_passes_per_90': Decimal('3.05'), 'xt_per_90': Decimal('0.162')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "tac-defence",
+    "question": "How good was Arsenal's defence in 2025/26?",
+    "answer": "Strong. 27 goals conceded in 38 matches, roughly 0.7 per game, alongside a high press at 10.76 PPDA and 63% field tilt \u2014 a side that defended largely by keeping the ball and the play away from its own goal.",
+    "answer_value": 27,
+    "answer_type": "judgement",
+    "family": "tactical_comparison",
+    "intent": "comparative",
+    "expected_tool": "sql",
+    "expected_query": "season_summary",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "27 goals conceded",
+      "PPDA 10.76"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-player_prog_passes-noni-madueke",
+    "question": "How many progressive passes did Noni Madueke make in 2025/2026?",
+    "answer": "28 progressive passes",
+    "answer_value": 28,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Noni Madueke",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Noni Madueke', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 16, 'minutes': 1299, 'goals': 3, 'assists': 1, 'shots': 26, 'key_passes': 22, 'progressive_passes': 28, 'passes': 494, 'passes_accurate': 332, 'tackles': 42, 'interceptions': 5, 'ball_recoveries': 35, 'total_xt': Decimal('0.932'), 'avg_rating': Decimal('6.66'), 'goals_per_90': Decimal('0.21'), 'assists_per_90': Decimal('0.07'), 'prog_passes_per_90': Decimal('1.94'), 'xt_per_90': Decimal('0.065')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_assists-declan-rice",
+    "question": "How many assists did Declan Rice provide in 2025/2026?",
+    "answer": "4 assists",
+    "answer_value": 4,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Declan Rice",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Declan Rice', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 35, 'minutes': 3309, 'goals': 4, 'assists': 4, 'shots': 40, 'key_passes': 63, 'progressive_passes': 186, 'passes': 2363, 'passes_accurate': 1940, 'tackles': 84, 'interceptions': 37, 'ball_recoveries': 180, 'total_xt': Decimal('6.732'), 'avg_rating': Decimal('7.26'), 'goals_per_90': Decimal('0.11'), 'assists_per_90': Decimal('0.11'), 'prog_passes_per_90': Decimal('5.06'), 'xt_per_90': Decimal('0.183')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2025-09-28",
+    "question": "What was the score when Arsenal played Newcastle on 2025-09-28?",
+    "answer": "Newcastle 1-2 Arsenal",
+    "answer_value": [
+      2,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Newcastle",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Newcastle 1-2 Arsenal on 2025-09-28"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-david-raya",
+    "question": "What was David Raya's expected threat per 90 in 2025/2026?",
+    "answer": "0.062 xT per 90",
+    "answer_value": 0.062,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "David Raya",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'David Raya', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 37, 'minutes': 3573, 'goals': 0, 'assists': 0, 'shots': 0, 'key_passes': 3, 'progressive_passes': 9, 'passes': 1275, 'passes_accurate': 882, 'tackles': 1, 'interceptions': 1, 'ball_recoveries': 53, 'total_xt': Decimal('2.451'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.00'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('0.23'), 'xt_per_90': Decimal('0.062')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-04-11",
+    "question": "What was the score when Arsenal played Bournemouth on 2026-04-11?",
+    "answer": "Arsenal 1-2 Bournemouth",
+    "answer_value": [
+      1,
+      2
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Bournemouth",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 1-2 Bournemouth on 2026-04-11"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-05-10",
+    "question": "What was the score when Arsenal played West Ham on 2026-05-10?",
+    "answer": "West Ham 0-1 Arsenal",
+    "answer_value": [
+      1,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "West Ham",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] West Ham 0-1 Arsenal on 2026-05-10"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-02-18",
+    "question": "What was the score when Arsenal played Wolves on 2026-02-18?",
+    "answer": "Wolves 2-2 Arsenal",
+    "answer_value": [
+      2,
+      2
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Wolves",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Wolves 2-2 Arsenal on 2026-02-18"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-martin-\u00f8degaard",
+    "question": "What was Martin \u00d8degaard's expected threat per 90 in 2025/2026?",
+    "answer": "0.179 xT per 90",
+    "answer_value": 0.179,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Martin \u00d8degaard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Martin \u00d8degaard', 'team_name': 'Arsenal', 'appearances': 25, 'starts': 16, 'minutes': 1456, 'goals': 1, 'assists': 6, 'shots': 22, 'key_passes': 39, 'progressive_passes': 87, 'passes': 854, 'passes_accurate': 711, 'tackles': 31, 'interceptions': 7, 'ball_recoveries': 70, 'total_xt': Decimal('2.902'), 'avg_rating': Decimal('6.70'), 'goals_per_90': Decimal('0.06'), 'assists_per_90': Decimal('0.37'), 'prog_passes_per_90': Decimal('5.38'), 'xt_per_90': Decimal('0.179')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-mart\u00edn-zubimendi",
+    "question": "What was Mart\u00edn Zubimendi's expected threat per 90 in 2025/2026?",
+    "answer": "0.067 xT per 90",
+    "answer_value": 0.067,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Mart\u00edn Zubimendi",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Mart\u00edn Zubimendi', 'team_name': 'Arsenal', 'appearances': 38, 'starts': 34, 'minutes': 3206, 'goals': 5, 'assists': 0, 'shots': 27, 'key_passes': 19, 'progressive_passes': 132, 'passes': 1953, 'passes_accurate': 1697, 'tackles': 89, 'interceptions': 39, 'ball_recoveries': 116, 'total_xt': Decimal('2.384'), 'avg_rating': Decimal('6.87'), 'goals_per_90': Decimal('0.14'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.71'), 'xt_per_90': Decimal('0.067')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-season_record",
+    "question": "What was Arsenal's win-draw-loss record in 2025/2026?",
+    "answer": "26 wins, 7 draws, 5 defeats",
+    "answer_value": [
+      26,
+      7,
+      5
+    ],
+    "answer_type": "list",
+    "family": "season_record",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "season_summary",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[season_summary] A team's season record: played, won, drawn, lost, goals, points, xG: {'played': 38, 'won': 26, 'drawn': 7, 'lost': 5, 'goals_for': 71, 'goals_against': 27, 'goal_difference': 44, 'points': 85, 'total_xg': Decimal('65.84'), 'avg_possession': Decimal('55.89'), 'avg_field_tilt': Decimal('64.04')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-noni-madueke",
+    "question": "How many goals did Noni Madueke score in 2025/2026?",
+    "answer": "3 goals",
+    "answer_value": 3,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Noni Madueke",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Noni Madueke', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 16, 'minutes': 1299, 'goals': 3, 'assists': 1, 'shots': 26, 'key_passes': 22, 'progressive_passes': 28, 'passes': 494, 'passes_accurate': 332, 'tackles': 42, 'interceptions': 5, 'ball_recoveries': 35, 'total_xt': Decimal('0.932'), 'avg_rating': Decimal('6.66'), 'goals_per_90': Decimal('0.21'), 'assists_per_90': Decimal('0.07'), 'prog_passes_per_90': Decimal('1.94'), 'xt_per_90': Decimal('0.065')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_assists-martin-\u00f8degaard",
+    "question": "How many assists did Martin \u00d8degaard provide in 2025/2026?",
+    "answer": "6 assists",
+    "answer_value": 6,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Martin \u00d8degaard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Martin \u00d8degaard', 'team_name': 'Arsenal', 'appearances': 25, 'starts': 16, 'minutes': 1456, 'goals': 1, 'assists': 6, 'shots': 22, 'key_passes': 39, 'progressive_passes': 87, 'passes': 854, 'passes_accurate': 711, 'tackles': 31, 'interceptions': 7, 'ball_recoveries': 70, 'total_xt': Decimal('2.902'), 'avg_rating': Decimal('6.70'), 'goals_per_90': Decimal('0.06'), 'assists_per_90': Decimal('0.37'), 'prog_passes_per_90': Decimal('5.38'), 'xt_per_90': Decimal('0.179')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_xt-gabriel-magalh\u00e3es",
+    "question": "What was Gabriel Magalh\u00e3es's expected threat per 90 in 2025/2026?",
+    "answer": "0.073 xT per 90",
+    "answer_value": 0.073,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Gabriel Magalh\u00e3es",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Gabriel Magalh\u00e3es', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 30, 'minutes': 2958, 'goals': 3, 'assists': 3, 'shots': 27, 'key_passes': 7, 'progressive_passes': 96, 'passes': 1740, 'passes_accurate': 1531, 'tackles': 45, 'interceptions': 23, 'ball_recoveries': 64, 'total_xt': Decimal('2.410'), 'avg_rating': Decimal('7.22'), 'goals_per_90': Decimal('0.09'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.92'), 'xt_per_90': Decimal('0.073')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "tac-refuse-opinion",
+    "question": "Is Declan Rice better than Rodri?",
+    "answer": "Rodri does not appear in this warehouse, which holds Arsenal's matches only \u2014 opposition players appear solely in matches against Arsenal. A comparison cannot be made from the available evidence.",
+    "answer_value": "refuse",
+    "answer_type": "refusal",
+    "family": "tactical_refusal",
+    "intent": "tactical",
+    "expected_tool": "none",
+    "expected_query": null,
+    "query_params": {},
+    "evidence": [],
+    "split": "test"
+  },
+  {
+    "id": "stat-season_points",
+    "question": "How many points did Arsenal finish the 2025/2026 season with?",
+    "answer": "85 points",
+    "answer_value": 85,
+    "answer_type": "number",
+    "family": "season_points",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "season_summary",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[season_summary] A team's season record: played, won, drawn, lost, goals, points, xG: {'played': 38, 'won': 26, 'drawn': 7, 'lost': 5, 'goals_for': 71, 'goals_against': 27, 'goal_difference': 44, 'points': 85, 'total_xg': Decimal('65.84'), 'avg_possession': Decimal('55.89'), 'avg_field_tilt': Decimal('64.04')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-martin-\u00f8degaard",
+    "question": "How many goals did Martin \u00d8degaard score in 2025/2026?",
+    "answer": "1 goals",
+    "answer_value": 1,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Martin \u00d8degaard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Martin \u00d8degaard', 'team_name': 'Arsenal', 'appearances': 25, 'starts': 16, 'minutes': 1456, 'goals': 1, 'assists': 6, 'shots': 22, 'key_passes': 39, 'progressive_passes': 87, 'passes': 854, 'passes_accurate': 711, 'tackles': 31, 'interceptions': 7, 'ball_recoveries': 70, 'total_xt': Decimal('2.902'), 'avg_rating': Decimal('6.70'), 'goals_per_90': Decimal('0.06'), 'assists_per_90': Decimal('0.37'), 'prog_passes_per_90': Decimal('5.38'), 'xt_per_90': Decimal('0.179')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-04-25",
+    "question": "What was the score when Arsenal played Newcastle on 2026-04-25?",
+    "answer": "Arsenal 1-0 Newcastle",
+    "answer_value": [
+      1,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Newcastle",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 1-0 Newcastle on 2026-04-25"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-viktor-gy\u00f6keres",
+    "question": "How many minutes did Viktor Gy\u00f6keres play in 2025/2026?",
+    "answer": "2409 minutes",
+    "answer_value": 2409,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Viktor Gy\u00f6keres",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Viktor Gy\u00f6keres', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 26, 'minutes': 2409, 'goals': 14, 'assists': 1, 'shots': 55, 'key_passes': 20, 'progressive_passes': 16, 'passes': 327, 'passes_accurate': 202, 'tackles': 15, 'interceptions': 1, 'ball_recoveries': 55, 'total_xt': Decimal('0.592'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.52'), 'assists_per_90': Decimal('0.04'), 'prog_passes_per_90': Decimal('0.60'), 'xt_per_90': Decimal('0.022')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-player_minutes-noni-madueke",
+    "question": "How many minutes did Noni Madueke play in 2025/2026?",
+    "answer": "1299 minutes",
+    "answer_value": 1299,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Noni Madueke",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Noni Madueke', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 16, 'minutes': 1299, 'goals': 3, 'assists': 1, 'shots': 26, 'key_passes': 22, 'progressive_passes': 28, 'passes': 494, 'passes_accurate': 332, 'tackles': 42, 'interceptions': 5, 'ball_recoveries': 35, 'total_xt': Decimal('0.932'), 'avg_rating': Decimal('6.66'), 'goals_per_90': Decimal('0.21'), 'assists_per_90': Decimal('0.07'), 'prog_passes_per_90': Decimal('1.94'), 'xt_per_90': Decimal('0.065')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-match_score-2026-01-08",
+    "question": "What was the score when Arsenal played Liverpool on 2026-01-08?",
+    "answer": "Arsenal 0-0 Liverpool",
+    "answer_value": [
+      0,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Liverpool",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 0-0 Liverpool on 2026-01-08"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2025-11-01",
+    "question": "What was the score when Arsenal played Burnley on 2025-11-01?",
+    "answer": "Burnley 0-2 Arsenal",
+    "answer_value": [
+      2,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Burnley",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Burnley 0-2 Arsenal on 2025-11-01"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-jurri\u00ebn-timber",
+    "question": "How many goals did Jurri\u00ebn Timber score in 2025/2026?",
+    "answer": "3 goals",
+    "answer_value": 3,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Jurri\u00ebn Timber",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Jurri\u00ebn Timber', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 28, 'minutes': 2632, 'goals': 3, 'assists': 3, 'shots': 25, 'key_passes': 27, 'progressive_passes': 121, 'passes': 1284, 'passes_accurate': 1067, 'tackles': 75, 'interceptions': 24, 'ball_recoveries': 97, 'total_xt': Decimal('2.164'), 'avg_rating': Decimal('6.96'), 'goals_per_90': Decimal('0.10'), 'assists_per_90': Decimal('0.10'), 'prog_passes_per_90': Decimal('4.14'), 'xt_per_90': Decimal('0.074')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "tac-pressing-best",
+    "question": "In which match did Arsenal press most aggressively in 2025/26?",
+    "answer": "Away at West Ham, where Arsenal recorded a PPDA of 4.69 \u2014 by some distance their most intense press of the season. They won that match 2-0 from 2.91 xG.",
+    "answer_value": 4.69,
+    "answer_type": "judgement",
+    "family": "tactical_pressing",
+    "intent": "tactical",
+    "expected_tool": "sql",
+    "expected_query": "tactical_features",
+    "query_params": {
+      "opponent": "West Ham United",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "PPDA 4.69 v West Ham"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_assists-david-raya",
+    "question": "How many assists did David Raya provide in 2025/2026?",
+    "answer": "0 assists",
+    "answer_value": 0,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "David Raya",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'David Raya', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 37, 'minutes': 3573, 'goals': 0, 'assists': 0, 'shots': 0, 'key_passes': 3, 'progressive_passes': 9, 'passes': 1275, 'passes_accurate': 882, 'tackles': 1, 'interceptions': 1, 'ball_recoveries': 53, 'total_xt': Decimal('2.451'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.00'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('0.23'), 'xt_per_90': Decimal('0.062')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "tac-home-away",
+    "question": "Was Arsenal better at home or away in 2025/26?",
+    "answer": "The home and away records should be compared directly from v_team_match_results rather than asserted.",
+    "answer_value": null,
+    "answer_type": "judgement",
+    "family": "tactical_comparison",
+    "intent": "comparative",
+    "expected_tool": "sql",
+    "expected_query": "results_by_venue",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "home and away split"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "tac-refuse-next-season",
+    "question": "How many points will Arsenal get in 2026/27?",
+    "answer": "No 2026/27 matches have been played, so there is nothing to base a figure on. This cannot be answered from the available evidence.",
+    "answer_value": "refuse",
+    "answer_type": "refusal",
+    "family": "tactical_refusal",
+    "intent": "tactical",
+    "expected_tool": "none",
+    "expected_query": null,
+    "query_params": {},
+    "evidence": [],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_assists-eberechi-eze",
+    "question": "How many assists did Eberechi Eze provide in 2025/2026?",
+    "answer": "2 assists",
+    "answer_value": 2,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Eberechi Eze",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Eberechi Eze', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 21, 'minutes': 1954, 'goals': 7, 'assists': 2, 'shots': 57, 'key_passes': 16, 'progressive_passes': 52, 'passes': 654, 'passes_accurate': 552, 'tackles': 25, 'interceptions': 11, 'ball_recoveries': 74, 'total_xt': Decimal('1.249'), 'avg_rating': Decimal('6.78'), 'goals_per_90': Decimal('0.32'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.40'), 'xt_per_90': Decimal('0.058')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_assists-william-saliba",
+    "question": "How many assists did William Saliba provide in 2025/2026?",
+    "answer": "0 assists",
+    "answer_value": 0,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "William Saliba",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'William Saliba', 'team_name': 'Arsenal', 'appearances': 31, 'starts': 30, 'minutes': 2805, 'goals': 1, 'assists': 0, 'shots': 5, 'key_passes': 10, 'progressive_passes': 124, 'passes': 2119, 'passes_accurate': 1964, 'tackles': 42, 'interceptions': 17, 'ball_recoveries': 113, 'total_xt': Decimal('2.481'), 'avg_rating': Decimal('6.92'), 'goals_per_90': Decimal('0.03'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.98'), 'xt_per_90': Decimal('0.080')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_goals-viktor-gy\u00f6keres",
+    "question": "How many goals did Viktor Gy\u00f6keres score in 2025/2026?",
+    "answer": "14 goals",
+    "answer_value": 14,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Viktor Gy\u00f6keres",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Viktor Gy\u00f6keres', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 26, 'minutes': 2409, 'goals': 14, 'assists': 1, 'shots': 55, 'key_passes': 20, 'progressive_passes': 16, 'passes': 327, 'passes_accurate': 202, 'tackles': 15, 'interceptions': 1, 'ball_recoveries': 55, 'total_xt': Decimal('0.592'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.52'), 'assists_per_90': Decimal('0.04'), 'prog_passes_per_90': Decimal('0.60'), 'xt_per_90': Decimal('0.022')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_assists-leandro-trossard",
+    "question": "How many assists did Leandro Trossard provide in 2025/2026?",
+    "answer": "6 assists",
+    "answer_value": 6,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Leandro Trossard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Leandro Trossard', 'team_name': 'Arsenal', 'appearances': 34, 'starts': 21, 'minutes': 2136, 'goals': 6, 'assists': 6, 'shots': 53, 'key_passes': 36, 'progressive_passes': 93, 'passes': 825, 'passes_accurate': 606, 'tackles': 45, 'interceptions': 9, 'ball_recoveries': 80, 'total_xt': Decimal('3.141'), 'avg_rating': Decimal('6.88'), 'goals_per_90': Decimal('0.25'), 'assists_per_90': Decimal('0.25'), 'prog_passes_per_90': Decimal('3.92'), 'xt_per_90': Decimal('0.132')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_xt-viktor-gy\u00f6keres",
+    "question": "What was Viktor Gy\u00f6keres's expected threat per 90 in 2025/2026?",
+    "answer": "0.022 xT per 90",
+    "answer_value": 0.022,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Viktor Gy\u00f6keres",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Viktor Gy\u00f6keres', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 26, 'minutes': 2409, 'goals': 14, 'assists': 1, 'shots': 55, 'key_passes': 20, 'progressive_passes': 16, 'passes': 327, 'passes_accurate': 202, 'tackles': 15, 'interceptions': 1, 'ball_recoveries': 55, 'total_xt': Decimal('0.592'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.52'), 'assists_per_90': Decimal('0.04'), 'prog_passes_per_90': Decimal('0.60'), 'xt_per_90': Decimal('0.022')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2025-12-03",
+    "question": "What was the score when Arsenal played Brentford on 2025-12-03?",
+    "answer": "Arsenal 2-0 Brentford",
+    "answer_value": [
+      2,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Brentford",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 2-0 Brentford on 2025-12-03"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2025-10-18",
+    "question": "What was the score when Arsenal played Fulham on 2025-10-18?",
+    "answer": "Fulham 0-1 Arsenal",
+    "answer_value": [
+      1,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Fulham",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Fulham 0-1 Arsenal on 2025-10-18"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_prog_passes-declan-rice",
+    "question": "How many progressive passes did Declan Rice make in 2025/2026?",
+    "answer": "186 progressive passes",
+    "answer_value": 186,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Declan Rice",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Declan Rice', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 35, 'minutes': 3309, 'goals': 4, 'assists': 4, 'shots': 40, 'key_passes': 63, 'progressive_passes': 186, 'passes': 2363, 'passes_accurate': 1940, 'tackles': 84, 'interceptions': 37, 'ball_recoveries': 180, 'total_xt': Decimal('6.732'), 'avg_rating': Decimal('7.26'), 'goals_per_90': Decimal('0.11'), 'assists_per_90': Decimal('0.11'), 'prog_passes_per_90': Decimal('5.06'), 'xt_per_90': Decimal('0.183')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-season_field_tilt",
+    "question": "What was Arsenal's average field tilt in 2025/2026?",
+    "answer": "63.15%",
+    "answer_value": 63.15,
+    "answer_type": "number",
+    "family": "season_field_tilt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "season_pressing",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[season_pressing] A team's average pressing metrics across a season: {'avg_ppda': Decimal('10.76'), 'avg_field_tilt': Decimal('63.15'), 'total_counterpresses': 2242, 'total_high_turnovers': 207, 'avg_sequence_events': Decimal('4.80'), 'matches': 38}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_prog_passes-jurri\u00ebn-timber",
+    "question": "How many progressive passes did Jurri\u00ebn Timber make in 2025/2026?",
+    "answer": "121 progressive passes",
+    "answer_value": 121,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Jurri\u00ebn Timber",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Jurri\u00ebn Timber', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 28, 'minutes': 2632, 'goals': 3, 'assists': 3, 'shots': 25, 'key_passes': 27, 'progressive_passes': 121, 'passes': 1284, 'passes_accurate': 1067, 'tackles': 75, 'interceptions': 24, 'ball_recoveries': 97, 'total_xt': Decimal('2.164'), 'avg_rating': Decimal('6.96'), 'goals_per_90': Decimal('0.10'), 'assists_per_90': Decimal('0.10'), 'prog_passes_per_90': Decimal('4.14'), 'xt_per_90': Decimal('0.074')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_prog_passes-mart\u00edn-zubimendi",
+    "question": "How many progressive passes did Mart\u00edn Zubimendi make in 2025/2026?",
+    "answer": "132 progressive passes",
+    "answer_value": 132,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Mart\u00edn Zubimendi",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Mart\u00edn Zubimendi', 'team_name': 'Arsenal', 'appearances': 38, 'starts': 34, 'minutes': 3206, 'goals': 5, 'assists': 0, 'shots': 27, 'key_passes': 19, 'progressive_passes': 132, 'passes': 1953, 'passes_accurate': 1697, 'tackles': 89, 'interceptions': 39, 'ball_recoveries': 116, 'total_xt': Decimal('2.384'), 'avg_rating': Decimal('6.87'), 'goals_per_90': Decimal('0.14'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.71'), 'xt_per_90': Decimal('0.067')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_minutes-mart\u00edn-zubimendi",
+    "question": "How many minutes did Mart\u00edn Zubimendi play in 2025/2026?",
+    "answer": "3206 minutes",
+    "answer_value": 3206,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Mart\u00edn Zubimendi",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Mart\u00edn Zubimendi', 'team_name': 'Arsenal', 'appearances': 38, 'starts': 34, 'minutes': 3206, 'goals': 5, 'assists': 0, 'shots': 27, 'key_passes': 19, 'progressive_passes': 132, 'passes': 1953, 'passes_accurate': 1697, 'tackles': 89, 'interceptions': 39, 'ball_recoveries': 116, 'total_xt': Decimal('2.384'), 'avg_rating': Decimal('6.87'), 'goals_per_90': Decimal('0.14'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.71'), 'xt_per_90': Decimal('0.067')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "tac-carrier",
+    "question": "Who was Arsenal's most important ball carrier in 2025/26?",
+    "answer": "Declan Rice. He carried the ball 888 times, 186 of those progressive, more than any other Arsenal player.",
+    "answer_value": "Declan Rice",
+    "answer_type": "text",
+    "family": "tactical_players",
+    "intent": "tactical",
+    "expected_tool": "sql",
+    "expected_query": "top_carriers",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026",
+      "limit": 5
+    },
+    "evidence": [
+      "Rice 888 carries, 186 progressive"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-bukayo-saka",
+    "question": "How many minutes did Bukayo Saka play in 2025/2026?",
+    "answer": "2388 minutes",
+    "answer_value": 2388,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Bukayo Saka",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Bukayo Saka', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 25, 'minutes': 2388, 'goals': 7, 'assists': 4, 'shots': 71, 'key_passes': 61, 'progressive_passes': 81, 'passes': 907, 'passes_accurate': 645, 'tackles': 57, 'interceptions': 16, 'ball_recoveries': 117, 'total_xt': Decimal('4.288'), 'avg_rating': Decimal('7.25'), 'goals_per_90': Decimal('0.26'), 'assists_per_90': Decimal('0.15'), 'prog_passes_per_90': Decimal('3.05'), 'xt_per_90': Decimal('0.162')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-player_assists-jurri\u00ebn-timber",
+    "question": "How many assists did Jurri\u00ebn Timber provide in 2025/2026?",
+    "answer": "3 assists",
+    "answer_value": 3,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Jurri\u00ebn Timber",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Jurri\u00ebn Timber', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 28, 'minutes': 2632, 'goals': 3, 'assists': 3, 'shots': 25, 'key_passes': 27, 'progressive_passes': 121, 'passes': 1284, 'passes_accurate': 1067, 'tackles': 75, 'interceptions': 24, 'ball_recoveries': 97, 'total_xt': Decimal('2.164'), 'avg_rating': Decimal('6.96'), 'goals_per_90': Decimal('0.10'), 'assists_per_90': Decimal('0.10'), 'prog_passes_per_90': Decimal('4.14'), 'xt_per_90': Decimal('0.074')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_xt-eberechi-eze",
+    "question": "What was Eberechi Eze's expected threat per 90 in 2025/2026?",
+    "answer": "0.058 xT per 90",
+    "answer_value": 0.058,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Eberechi Eze",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Eberechi Eze', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 21, 'minutes': 1954, 'goals': 7, 'assists': 2, 'shots': 57, 'key_passes': 16, 'progressive_passes': 52, 'passes': 654, 'passes_accurate': 552, 'tackles': 25, 'interceptions': 11, 'ball_recoveries': 74, 'total_xt': Decimal('1.249'), 'avg_rating': Decimal('6.78'), 'goals_per_90': Decimal('0.32'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.40'), 'xt_per_90': Decimal('0.058')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2025-11-08",
+    "question": "What was the score when Arsenal played Sunderland on 2025-11-08?",
+    "answer": "Sunderland 2-2 Arsenal",
+    "answer_value": [
+      2,
+      2
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Sunderland",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Sunderland 2-2 Arsenal on 2025-11-08"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "tac-retrieve-style-vs-opponent",
+    "question": "How did Arsenal set up against Manchester City?",
+    "answer": "Should retrieve the tactical and pressing documents for the Manchester City fixtures and summarise the approach.",
+    "answer_value": null,
+    "answer_type": "judgement",
+    "family": "tactical_retrieval",
+    "intent": "tactical",
+    "expected_tool": "retrieval",
+    "expected_query": "tactical_features",
+    "query_params": {
+      "opponent": "Manchester City",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "tactical document v Manchester City"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-william-saliba",
+    "question": "What was William Saliba's expected threat per 90 in 2025/2026?",
+    "answer": "0.08 xT per 90",
+    "answer_value": 0.08,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "William Saliba",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'William Saliba', 'team_name': 'Arsenal', 'appearances': 31, 'starts': 30, 'minutes': 2805, 'goals': 1, 'assists': 0, 'shots': 5, 'key_passes': 10, 'progressive_passes': 124, 'passes': 2119, 'passes_accurate': 1964, 'tackles': 42, 'interceptions': 17, 'ball_recoveries': 113, 'total_xt': Decimal('2.481'), 'avg_rating': Decimal('6.92'), 'goals_per_90': Decimal('0.03'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.98'), 'xt_per_90': Decimal('0.080')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-05-18",
+    "question": "What was the score when Arsenal played Burnley on 2026-05-18?",
+    "answer": "Arsenal 1-0 Burnley",
+    "answer_value": [
+      1,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Burnley",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 1-0 Burnley on 2026-05-18"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "tac-retrieve-longmove",
+    "question": "Tell me about Arsenal's longest passing moves of the season.",
+    "answer": "Should retrieve long possession-sequence documents, or use the longest_sequences query, and describe the moves.",
+    "answer_value": null,
+    "answer_type": "judgement",
+    "family": "tactical_retrieval",
+    "intent": "tactical",
+    "expected_tool": "retrieval",
+    "expected_query": "longest_sequences",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026",
+      "limit": 5
+    },
+    "evidence": [
+      "long sequence documents"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-jurri\u00ebn-timber",
+    "question": "What was Jurri\u00ebn Timber's expected threat per 90 in 2025/2026?",
+    "answer": "0.074 xT per 90",
+    "answer_value": 0.074,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Jurri\u00ebn Timber",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Jurri\u00ebn Timber', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 28, 'minutes': 2632, 'goals': 3, 'assists': 3, 'shots': 25, 'key_passes': 27, 'progressive_passes': 121, 'passes': 1284, 'passes_accurate': 1067, 'tackles': 75, 'interceptions': 24, 'ball_recoveries': 97, 'total_xt': Decimal('2.164'), 'avg_rating': Decimal('6.96'), 'goals_per_90': Decimal('0.10'), 'assists_per_90': Decimal('0.10'), 'prog_passes_per_90': Decimal('4.14'), 'xt_per_90': Decimal('0.074')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-william-saliba",
+    "question": "How many minutes did William Saliba play in 2025/2026?",
+    "answer": "2805 minutes",
+    "answer_value": 2805,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "William Saliba",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'William Saliba', 'team_name': 'Arsenal', 'appearances': 31, 'starts': 30, 'minutes': 2805, 'goals': 1, 'assists': 0, 'shots': 5, 'key_passes': 10, 'progressive_passes': 124, 'passes': 2119, 'passes_accurate': 1964, 'tackles': 42, 'interceptions': 17, 'ball_recoveries': 113, 'total_xt': Decimal('2.481'), 'avg_rating': Decimal('6.92'), 'goals_per_90': Decimal('0.03'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.98'), 'xt_per_90': Decimal('0.080')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-player_prog_passes-martin-\u00f8degaard",
+    "question": "How many progressive passes did Martin \u00d8degaard make in 2025/2026?",
+    "answer": "87 progressive passes",
+    "answer_value": 87,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Martin \u00d8degaard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Martin \u00d8degaard', 'team_name': 'Arsenal', 'appearances': 25, 'starts': 16, 'minutes': 1456, 'goals': 1, 'assists': 6, 'shots': 22, 'key_passes': 39, 'progressive_passes': 87, 'passes': 854, 'passes_accurate': 711, 'tackles': 31, 'interceptions': 7, 'ball_recoveries': 70, 'total_xt': Decimal('2.902'), 'avg_rating': Decimal('6.70'), 'goals_per_90': Decimal('0.06'), 'assists_per_90': Decimal('0.37'), 'prog_passes_per_90': Decimal('5.38'), 'xt_per_90': Decimal('0.179')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2026-05-24",
+    "question": "What was the score when Arsenal played Crystal Palace on 2026-05-24?",
+    "answer": "Crystal Palace 1-2 Arsenal",
+    "answer_value": [
+      2,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Crystal Palace",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Crystal Palace 1-2 Arsenal on 2026-05-24"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "tac-pressing-intensity",
+    "question": "Was Arsenal a high-pressing side in 2025/26, and how do you know?",
+    "answer": "Yes. Arsenal averaged 10.76 PPDA across the season, which sits in the committed-pressing band \u2014 elite pressing sides run 7-9 and passive sides 15 or more. They also counterpressed 2,242 times and won the ball in the attacking third 207 times.",
+    "answer_value": 10.76,
+    "answer_type": "judgement",
+    "family": "tactical_pressing",
+    "intent": "tactical",
+    "expected_tool": "sql",
+    "expected_query": "season_pressing",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "season PPDA 10.76",
+      "2242 counterpresses",
+      "207 high turnovers"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_prog_passes-gabriel-magalh\u00e3es",
+    "question": "How many progressive passes did Gabriel Magalh\u00e3es make in 2025/2026?",
+    "answer": "96 progressive passes",
+    "answer_value": 96,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Gabriel Magalh\u00e3es",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Gabriel Magalh\u00e3es', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 30, 'minutes': 2958, 'goals': 3, 'assists': 3, 'shots': 27, 'key_passes': 7, 'progressive_passes': 96, 'passes': 1740, 'passes_accurate': 1531, 'tackles': 45, 'interceptions': 23, 'ball_recoveries': 64, 'total_xt': Decimal('2.410'), 'avg_rating': Decimal('7.22'), 'goals_per_90': Decimal('0.09'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.92'), 'xt_per_90': Decimal('0.073')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_prog_passes-viktor-gy\u00f6keres",
+    "question": "How many progressive passes did Viktor Gy\u00f6keres make in 2025/2026?",
+    "answer": "16 progressive passes",
+    "answer_value": 16,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Viktor Gy\u00f6keres",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Viktor Gy\u00f6keres', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 26, 'minutes': 2409, 'goals': 14, 'assists': 1, 'shots': 55, 'key_passes': 20, 'progressive_passes': 16, 'passes': 327, 'passes_accurate': 202, 'tackles': 15, 'interceptions': 1, 'ball_recoveries': 55, 'total_xt': Decimal('0.592'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.52'), 'assists_per_90': Decimal('0.04'), 'prog_passes_per_90': Decimal('0.60'), 'xt_per_90': Decimal('0.022')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "tac-territory",
+    "question": "How much of the game did Arsenal spend in the opposition half?",
+    "answer": "Arsenal averaged 63.15% field tilt, meaning roughly two thirds of all final-third touches in their matches were theirs.",
+    "answer_value": 63.15,
+    "answer_type": "judgement",
+    "family": "tactical_buildup",
+    "intent": "tactical",
+    "expected_tool": "sql",
+    "expected_query": "season_pressing",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "field tilt 63.15%"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2025-12-20",
+    "question": "What was the score when Arsenal played Everton on 2025-12-20?",
+    "answer": "Everton 0-1 Arsenal",
+    "answer_value": [
+      1,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Everton",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Everton 0-1 Arsenal on 2025-12-20"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-leandro-trossard",
+    "question": "What was Leandro Trossard's expected threat per 90 in 2025/2026?",
+    "answer": "0.132 xT per 90",
+    "answer_value": 0.132,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Leandro Trossard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Leandro Trossard', 'team_name': 'Arsenal', 'appearances': 34, 'starts': 21, 'minutes': 2136, 'goals': 6, 'assists': 6, 'shots': 53, 'key_passes': 36, 'progressive_passes': 93, 'passes': 825, 'passes_accurate': 606, 'tackles': 45, 'interceptions': 9, 'ball_recoveries': 80, 'total_xt': Decimal('3.141'), 'avg_rating': Decimal('6.88'), 'goals_per_90': Decimal('0.25'), 'assists_per_90': Decimal('0.25'), 'prog_passes_per_90': Decimal('3.92'), 'xt_per_90': Decimal('0.132')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_assists-mart\u00edn-zubimendi",
+    "question": "How many assists did Mart\u00edn Zubimendi provide in 2025/2026?",
+    "answer": "0 assists",
+    "answer_value": 0,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Mart\u00edn Zubimendi",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Mart\u00edn Zubimendi', 'team_name': 'Arsenal', 'appearances': 38, 'starts': 34, 'minutes': 3206, 'goals': 5, 'assists': 0, 'shots': 27, 'key_passes': 19, 'progressive_passes': 132, 'passes': 1953, 'passes_accurate': 1697, 'tackles': 89, 'interceptions': 39, 'ball_recoveries': 116, 'total_xt': Decimal('2.384'), 'avg_rating': Decimal('6.87'), 'goals_per_90': Decimal('0.14'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.71'), 'xt_per_90': Decimal('0.067')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2025-09-13",
+    "question": "What was the score when Arsenal played Nottingham Forest on 2025-09-13?",
+    "answer": "Arsenal 3-0 Nottingham Forest",
+    "answer_value": [
+      3,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Nottingham Forest",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 3-0 Nottingham Forest on 2025-09-13"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-riccardo-calafiori",
+    "question": "What was Riccardo Calafiori's expected threat per 90 in 2025/2026?",
+    "answer": "0.026 xT per 90",
+    "answer_value": 0.026,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Riccardo Calafiori",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Riccardo Calafiori', 'team_name': 'Arsenal', 'appearances': 28, 'starts': 22, 'minutes': 1826, 'goals': 1, 'assists': 0, 'shots': 32, 'key_passes': 9, 'progressive_passes': 66, 'passes': 923, 'passes_accurate': 757, 'tackles': 40, 'interceptions': 15, 'ball_recoveries': 73, 'total_xt': Decimal('0.520'), 'avg_rating': Decimal('6.84'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.25'), 'xt_per_90': Decimal('0.026')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2025-08-23",
+    "question": "What was the score when Arsenal played Leeds on 2025-08-23?",
+    "answer": "Arsenal 5-0 Leeds",
+    "answer_value": [
+      5,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Leeds",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 5-0 Leeds on 2025-08-23"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-jurri\u00ebn-timber",
+    "question": "How many minutes did Jurri\u00ebn Timber play in 2025/2026?",
+    "answer": "2632 minutes",
+    "answer_value": 2632,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Jurri\u00ebn Timber",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Jurri\u00ebn Timber', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 28, 'minutes': 2632, 'goals': 3, 'assists': 3, 'shots': 25, 'key_passes': 27, 'progressive_passes': 121, 'passes': 1284, 'passes_accurate': 1067, 'tackles': 75, 'interceptions': 24, 'ball_recoveries': 97, 'total_xt': Decimal('2.164'), 'avg_rating': Decimal('6.96'), 'goals_per_90': Decimal('0.10'), 'assists_per_90': Decimal('0.10'), 'prog_passes_per_90': Decimal('4.14'), 'xt_per_90': Decimal('0.074')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-match_score-2025-10-26",
+    "question": "What was the score when Arsenal played Crystal Palace on 2025-10-26?",
+    "answer": "Arsenal 1-0 Crystal Palace",
+    "answer_value": [
+      1,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Crystal Palace",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 1-0 Crystal Palace on 2025-10-26"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "tac-refuse-transfer",
+    "question": "How much did Arsenal pay for Viktor Gy\u00f6keres?",
+    "answer": "Transfer fees are not in this warehouse, which covers match events and derived tactical metrics only. This cannot be answered from the available evidence.",
+    "answer_value": "refuse",
+    "answer_type": "refusal",
+    "family": "tactical_refusal",
+    "intent": "tactical",
+    "expected_tool": "none",
+    "expected_query": null,
+    "query_params": {},
+    "evidence": [],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_minutes-martin-\u00f8degaard",
+    "question": "How many minutes did Martin \u00d8degaard play in 2025/2026?",
+    "answer": "1456 minutes",
+    "answer_value": 1456,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Martin \u00d8degaard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Martin \u00d8degaard', 'team_name': 'Arsenal', 'appearances': 25, 'starts': 16, 'minutes': 1456, 'goals': 1, 'assists': 6, 'shots': 22, 'key_passes': 39, 'progressive_passes': 87, 'passes': 854, 'passes_accurate': 711, 'tackles': 31, 'interceptions': 7, 'ball_recoveries': 70, 'total_xt': Decimal('2.902'), 'avg_rating': Decimal('6.70'), 'goals_per_90': Decimal('0.06'), 'assists_per_90': Decimal('0.37'), 'prog_passes_per_90': Decimal('5.38'), 'xt_per_90': Decimal('0.179')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-player_goals-eberechi-eze",
+    "question": "How many goals did Eberechi Eze score in 2025/2026?",
+    "answer": "7 goals",
+    "answer_value": 7,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Eberechi Eze",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Eberechi Eze', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 21, 'minutes': 1954, 'goals': 7, 'assists': 2, 'shots': 57, 'key_passes': 16, 'progressive_passes': 52, 'passes': 654, 'passes_accurate': 552, 'tackles': 25, 'interceptions': 11, 'ball_recoveries': 74, 'total_xt': Decimal('1.249'), 'avg_rating': Decimal('6.78'), 'goals_per_90': Decimal('0.32'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.40'), 'xt_per_90': Decimal('0.058')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-leandro-trossard",
+    "question": "How many minutes did Leandro Trossard play in 2025/2026?",
+    "answer": "2136 minutes",
+    "answer_value": 2136,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Leandro Trossard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Leandro Trossard', 'team_name': 'Arsenal', 'appearances': 34, 'starts': 21, 'minutes': 2136, 'goals': 6, 'assists': 6, 'shots': 53, 'key_passes': 36, 'progressive_passes': 93, 'passes': 825, 'passes_accurate': 606, 'tackles': 45, 'interceptions': 9, 'ball_recoveries': 80, 'total_xt': Decimal('3.141'), 'avg_rating': Decimal('6.88'), 'goals_per_90': Decimal('0.25'), 'assists_per_90': Decimal('0.25'), 'prog_passes_per_90': Decimal('3.92'), 'xt_per_90': Decimal('0.132')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "tac-retrieve-highturnover",
+    "question": "Describe a passage of play where Arsenal won the ball high and scored from it.",
+    "answer": "Should retrieve possession-sequence documents flagged as high turnovers that ended in a goal, and describe one concretely.",
+    "answer_value": null,
+    "answer_type": "judgement",
+    "family": "tactical_retrieval",
+    "intent": "tactical",
+    "expected_tool": "retrieval",
+    "expected_query": null,
+    "query_params": {
+      "phase": "transition",
+      "doc_type": "sequence"
+    },
+    "evidence": [
+      "a sequence document with is_high_turnover and ended_in_goal"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-01-25",
+    "question": "What was the score when Arsenal played Man Utd on 2026-01-25?",
+    "answer": "Arsenal 2-3 Man Utd",
+    "answer_value": [
+      2,
+      3
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Man Utd",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 2-3 Man Utd on 2026-01-25"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-gabriel-magalh\u00e3es",
+    "question": "How many goals did Gabriel Magalh\u00e3es score in 2025/2026?",
+    "answer": "3 goals",
+    "answer_value": 3,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Gabriel Magalh\u00e3es",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Gabriel Magalh\u00e3es', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 30, 'minutes': 2958, 'goals': 3, 'assists': 3, 'shots': 27, 'key_passes': 7, 'progressive_passes': 96, 'passes': 1740, 'passes_accurate': 1531, 'tackles': 45, 'interceptions': 23, 'ball_recoveries': 64, 'total_xt': Decimal('2.410'), 'avg_rating': Decimal('7.22'), 'goals_per_90': Decimal('0.09'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.92'), 'xt_per_90': Decimal('0.073')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "tac-buildup-style",
+    "question": "Did Arsenal play a patient possession game or a direct one in 2025/26?",
+    "answer": "Patient. Their possessions averaged 4.80 events, and they dominated territory with 63.15% average field tilt \u2014 a side that keeps the ball in the opposition half and works openings rather than going long.",
+    "answer_value": 4.8,
+    "answer_type": "judgement",
+    "family": "tactical_buildup",
+    "intent": "tactical",
+    "expected_tool": "sql",
+    "expected_query": "season_pressing",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "4.80 events per possession",
+      "field tilt 63.15%"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2026-04-19",
+    "question": "What was the score when Arsenal played Man City on 2026-04-19?",
+    "answer": "Man City 2-1 Arsenal",
+    "answer_value": [
+      1,
+      2
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Man City",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Man City 2-1 Arsenal on 2026-04-19"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-01-17",
+    "question": "What was the score when Arsenal played Nottingham Forest on 2026-01-17?",
+    "answer": "Nottingham Forest 0-0 Arsenal",
+    "answer_value": [
+      0,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Nottingham Forest",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Nottingham Forest 0-0 Arsenal on 2026-01-17"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_prog_passes-eberechi-eze",
+    "question": "How many progressive passes did Eberechi Eze make in 2025/2026?",
+    "answer": "52 progressive passes",
+    "answer_value": 52,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Eberechi Eze",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Eberechi Eze', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 21, 'minutes': 1954, 'goals': 7, 'assists': 2, 'shots': 57, 'key_passes': 16, 'progressive_passes': 52, 'passes': 654, 'passes_accurate': 552, 'tackles': 25, 'interceptions': 11, 'ball_recoveries': 74, 'total_xt': Decimal('1.249'), 'avg_rating': Decimal('6.78'), 'goals_per_90': Decimal('0.32'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.40'), 'xt_per_90': Decimal('0.058')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_assists-gabriel-magalh\u00e3es",
+    "question": "How many assists did Gabriel Magalh\u00e3es provide in 2025/2026?",
+    "answer": "3 assists",
+    "answer_value": 3,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Gabriel Magalh\u00e3es",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Gabriel Magalh\u00e3es', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 30, 'minutes': 2958, 'goals': 3, 'assists': 3, 'shots': 27, 'key_passes': 7, 'progressive_passes': 96, 'passes': 1740, 'passes_accurate': 1531, 'tackles': 45, 'interceptions': 23, 'ball_recoveries': 64, 'total_xt': Decimal('2.410'), 'avg_rating': Decimal('7.22'), 'goals_per_90': Decimal('0.09'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.92'), 'xt_per_90': Decimal('0.073')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_minutes-piero-hincapi\u00e9",
+    "question": "How many minutes did Piero Hincapi\u00e9 play in 2025/2026?",
+    "answer": "1921 minutes",
+    "answer_value": 1921,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Piero Hincapi\u00e9",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Piero Hincapi\u00e9', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 20, 'minutes': 1921, 'goals': 1, 'assists': 1, 'shots': 4, 'key_passes': 13, 'progressive_passes': 74, 'passes': 964, 'passes_accurate': 833, 'tackles': 62, 'interceptions': 26, 'ball_recoveries': 63, 'total_xt': Decimal('1.740'), 'avg_rating': Decimal('6.83'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.05'), 'prog_passes_per_90': Decimal('3.47'), 'xt_per_90': Decimal('0.082')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-player_minutes-eberechi-eze",
+    "question": "How many minutes did Eberechi Eze play in 2025/2026?",
+    "answer": "1954 minutes",
+    "answer_value": 1954,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Eberechi Eze",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Eberechi Eze', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 21, 'minutes': 1954, 'goals': 7, 'assists': 2, 'shots': 57, 'key_passes': 16, 'progressive_passes': 52, 'passes': 654, 'passes_accurate': 552, 'tackles': 25, 'interceptions': 11, 'ball_recoveries': 74, 'total_xt': Decimal('1.249'), 'avg_rating': Decimal('6.78'), 'goals_per_90': Decimal('0.32'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.40'), 'xt_per_90': Decimal('0.058')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-match_score-2026-03-14",
+    "question": "What was the score when Arsenal played Everton on 2026-03-14?",
+    "answer": "Arsenal 2-0 Everton",
+    "answer_value": [
+      2,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Everton",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 2-0 Everton on 2026-03-14"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-declan-rice",
+    "question": "How many minutes did Declan Rice play in 2025/2026?",
+    "answer": "3309 minutes",
+    "answer_value": 3309,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Declan Rice",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Declan Rice', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 35, 'minutes': 3309, 'goals': 4, 'assists': 4, 'shots': 40, 'key_passes': 63, 'progressive_passes': 186, 'passes': 2363, 'passes_accurate': 1940, 'tackles': 84, 'interceptions': 37, 'ball_recoveries': 180, 'total_xt': Decimal('6.732'), 'avg_rating': Decimal('7.26'), 'goals_per_90': Decimal('0.11'), 'assists_per_90': Decimal('0.11'), 'prog_passes_per_90': Decimal('5.06'), 'xt_per_90': Decimal('0.183')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-match_score-2025-12-06",
+    "question": "What was the score when Arsenal played Aston Villa on 2025-12-06?",
+    "answer": "Aston Villa 2-1 Arsenal",
+    "answer_value": [
+      1,
+      2
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Aston Villa",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Aston Villa 2-1 Arsenal on 2025-12-06"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-season_goals",
+    "question": "How many goals did Arsenal score in 2025/2026?",
+    "answer": "71 goals",
+    "answer_value": 71,
+    "answer_type": "number",
+    "family": "season_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "season_summary",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[season_summary] A team's season record: played, won, drawn, lost, goals, points, xG: {'played': 38, 'won': 26, 'drawn': 7, 'lost': 5, 'goals_for': 71, 'goals_against': 27, 'goal_difference': 44, 'points': 85, 'total_xg': Decimal('65.84'), 'avg_possession': Decimal('55.89'), 'avg_field_tilt': Decimal('64.04')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_prog_passes-leandro-trossard",
+    "question": "How many progressive passes did Leandro Trossard make in 2025/2026?",
+    "answer": "93 progressive passes",
+    "answer_value": 93,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Leandro Trossard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Leandro Trossard', 'team_name': 'Arsenal', 'appearances': 34, 'starts': 21, 'minutes': 2136, 'goals': 6, 'assists': 6, 'shots': 53, 'key_passes': 36, 'progressive_passes': 93, 'passes': 825, 'passes_accurate': 606, 'tackles': 45, 'interceptions': 9, 'ball_recoveries': 80, 'total_xt': Decimal('3.141'), 'avg_rating': Decimal('6.88'), 'goals_per_90': Decimal('0.25'), 'assists_per_90': Decimal('0.25'), 'prog_passes_per_90': Decimal('3.92'), 'xt_per_90': Decimal('0.132')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2026-01-03",
+    "question": "What was the score when Arsenal played Bournemouth on 2026-01-03?",
+    "answer": "Bournemouth 2-3 Arsenal",
+    "answer_value": [
+      3,
+      2
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Bournemouth",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Bournemouth 2-3 Arsenal on 2026-01-03"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-bukayo-saka",
+    "question": "What was Bukayo Saka's expected threat per 90 in 2025/2026?",
+    "answer": "0.162 xT per 90",
+    "answer_value": 0.162,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Bukayo Saka",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Bukayo Saka', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 25, 'minutes': 2388, 'goals': 7, 'assists': 4, 'shots': 71, 'key_passes': 61, 'progressive_passes': 81, 'passes': 907, 'passes_accurate': 645, 'tackles': 57, 'interceptions': 16, 'ball_recoveries': 117, 'total_xt': Decimal('4.288'), 'avg_rating': Decimal('7.25'), 'goals_per_90': Decimal('0.26'), 'assists_per_90': Decimal('0.15'), 'prog_passes_per_90': Decimal('3.05'), 'xt_per_90': Decimal('0.162')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_assists-piero-hincapi\u00e9",
+    "question": "How many assists did Piero Hincapi\u00e9 provide in 2025/2026?",
+    "answer": "1 assists",
+    "answer_value": 1,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Piero Hincapi\u00e9",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Piero Hincapi\u00e9', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 20, 'minutes': 1921, 'goals': 1, 'assists': 1, 'shots': 4, 'key_passes': 13, 'progressive_passes': 74, 'passes': 964, 'passes_accurate': 833, 'tackles': 62, 'interceptions': 26, 'ball_recoveries': 63, 'total_xt': Decimal('1.740'), 'avg_rating': Decimal('6.83'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.05'), 'prog_passes_per_90': Decimal('3.47'), 'xt_per_90': Decimal('0.082')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2026-02-12",
+    "question": "What was the score when Arsenal played Brentford on 2026-02-12?",
+    "answer": "Brentford 1-1 Arsenal",
+    "answer_value": [
+      1,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Brentford",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Brentford 1-1 Arsenal on 2026-02-12"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-leandro-trossard",
+    "question": "How many goals did Leandro Trossard score in 2025/2026?",
+    "answer": "6 goals",
+    "answer_value": 6,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Leandro Trossard",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Leandro Trossard', 'team_name': 'Arsenal', 'appearances': 34, 'starts': 21, 'minutes': 2136, 'goals': 6, 'assists': 6, 'shots': 53, 'key_passes': 36, 'progressive_passes': 93, 'passes': 825, 'passes_accurate': 606, 'tackles': 45, 'interceptions': 9, 'ball_recoveries': 80, 'total_xt': Decimal('3.141'), 'avg_rating': Decimal('6.88'), 'goals_per_90': Decimal('0.25'), 'assists_per_90': Decimal('0.25'), 'prog_passes_per_90': Decimal('3.92'), 'xt_per_90': Decimal('0.132')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-bukayo-saka",
+    "question": "How many goals did Bukayo Saka score in 2025/2026?",
+    "answer": "7 goals",
+    "answer_value": 7,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Bukayo Saka",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Bukayo Saka', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 25, 'minutes': 2388, 'goals': 7, 'assists': 4, 'shots': 71, 'key_passes': 61, 'progressive_passes': 81, 'passes': 907, 'passes_accurate': 645, 'tackles': 57, 'interceptions': 16, 'ball_recoveries': 117, 'total_xt': Decimal('4.288'), 'avg_rating': Decimal('7.25'), 'goals_per_90': Decimal('0.26'), 'assists_per_90': Decimal('0.15'), 'prog_passes_per_90': Decimal('3.05'), 'xt_per_90': Decimal('0.162')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2025-12-13",
+    "question": "What was the score when Arsenal played Wolves on 2025-12-13?",
+    "answer": "Arsenal 2-1 Wolves",
+    "answer_value": [
+      2,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Wolves",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 2-1 Wolves on 2025-12-13"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2025-09-21",
+    "question": "What was the score when Arsenal played Man City on 2025-09-21?",
+    "answer": "Arsenal 1-1 Man City",
+    "answer_value": [
+      1,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Man City",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 1-1 Man City on 2025-09-21"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-piero-hincapi\u00e9",
+    "question": "What was Piero Hincapi\u00e9's expected threat per 90 in 2025/2026?",
+    "answer": "0.082 xT per 90",
+    "answer_value": 0.082,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Piero Hincapi\u00e9",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Piero Hincapi\u00e9', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 20, 'minutes': 1921, 'goals': 1, 'assists': 1, 'shots': 4, 'key_passes': 13, 'progressive_passes': 74, 'passes': 964, 'passes_accurate': 833, 'tackles': 62, 'interceptions': 26, 'ball_recoveries': 63, 'total_xt': Decimal('1.740'), 'avg_rating': Decimal('6.83'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.05'), 'prog_passes_per_90': Decimal('3.47'), 'xt_per_90': Decimal('0.082')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_prog_passes-bukayo-saka",
+    "question": "How many progressive passes did Bukayo Saka make in 2025/2026?",
+    "answer": "81 progressive passes",
+    "answer_value": 81,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Bukayo Saka",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Bukayo Saka', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 25, 'minutes': 2388, 'goals': 7, 'assists': 4, 'shots': 71, 'key_passes': 61, 'progressive_passes': 81, 'passes': 907, 'passes_accurate': 645, 'tackles': 57, 'interceptions': 16, 'ball_recoveries': 117, 'total_xt': Decimal('4.288'), 'avg_rating': Decimal('7.25'), 'goals_per_90': Decimal('0.26'), 'assists_per_90': Decimal('0.15'), 'prog_passes_per_90': Decimal('3.05'), 'xt_per_90': Decimal('0.162')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_goals-piero-hincapi\u00e9",
+    "question": "How many goals did Piero Hincapi\u00e9 score in 2025/2026?",
+    "answer": "1 goals",
+    "answer_value": 1,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Piero Hincapi\u00e9",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Piero Hincapi\u00e9', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 20, 'minutes': 1921, 'goals': 1, 'assists': 1, 'shots': 4, 'key_passes': 13, 'progressive_passes': 74, 'passes': 964, 'passes_accurate': 833, 'tackles': 62, 'interceptions': 26, 'ball_recoveries': 63, 'total_xt': Decimal('1.740'), 'avg_rating': Decimal('6.83'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.05'), 'prog_passes_per_90': Decimal('3.47'), 'xt_per_90': Decimal('0.082')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-gabriel-magalh\u00e3es",
+    "question": "How many minutes did Gabriel Magalh\u00e3es play in 2025/2026?",
+    "answer": "2958 minutes",
+    "answer_value": 2958,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Gabriel Magalh\u00e3es",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Gabriel Magalh\u00e3es', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 30, 'minutes': 2958, 'goals': 3, 'assists': 3, 'shots': 27, 'key_passes': 7, 'progressive_passes': 96, 'passes': 1740, 'passes_accurate': 1531, 'tackles': 45, 'interceptions': 23, 'ball_recoveries': 64, 'total_xt': Decimal('2.410'), 'avg_rating': Decimal('7.22'), 'goals_per_90': Decimal('0.09'), 'assists_per_90': Decimal('0.09'), 'prog_passes_per_90': Decimal('2.92'), 'xt_per_90': Decimal('0.073')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-match_score-2025-10-04",
+    "question": "What was the score when Arsenal played West Ham on 2025-10-04?",
+    "answer": "Arsenal 2-0 West Ham",
+    "answer_value": [
+      2,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "West Ham",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 2-0 West Ham on 2025-10-04"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2025-12-27",
+    "question": "What was the score when Arsenal played Brighton on 2025-12-27?",
+    "answer": "Arsenal 2-1 Brighton",
+    "answer_value": [
+      2,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Brighton",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 2-1 Brighton on 2025-12-27"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_prog_passes-david-raya",
+    "question": "How many progressive passes did David Raya make in 2025/2026?",
+    "answer": "9 progressive passes",
+    "answer_value": 9,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "David Raya",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'David Raya', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 37, 'minutes': 3573, 'goals': 0, 'assists': 0, 'shots': 0, 'key_passes': 3, 'progressive_passes': 9, 'passes': 1275, 'passes_accurate': 882, 'tackles': 1, 'interceptions': 1, 'ball_recoveries': 53, 'total_xt': Decimal('2.451'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.00'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('0.23'), 'xt_per_90': Decimal('0.062')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_prog_passes-piero-hincapi\u00e9",
+    "question": "How many progressive passes did Piero Hincapi\u00e9 make in 2025/2026?",
+    "answer": "74 progressive passes",
+    "answer_value": 74,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Piero Hincapi\u00e9",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Piero Hincapi\u00e9', 'team_name': 'Arsenal', 'appearances': 30, 'starts': 20, 'minutes': 1921, 'goals': 1, 'assists': 1, 'shots': 4, 'key_passes': 13, 'progressive_passes': 74, 'passes': 964, 'passes_accurate': 833, 'tackles': 62, 'interceptions': 26, 'ball_recoveries': 63, 'total_xt': Decimal('1.740'), 'avg_rating': Decimal('6.83'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.05'), 'prog_passes_per_90': Decimal('3.47'), 'xt_per_90': Decimal('0.082')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "tac-refuse-shot-xg",
+    "question": "Which single shot was Arsenal's best chance of the season?",
+    "answer": "Per-shot xG is not populated \u2014 shots.xg is NULL throughout, because match-level xG comes from SofaScore and no shot-level model has been built. Big-chance flags exist, but they cannot rank one chance against another.",
+    "answer_value": "refuse",
+    "answer_type": "refusal",
+    "family": "tactical_refusal",
+    "intent": "tactical",
+    "expected_tool": "none",
+    "expected_query": null,
+    "query_params": {},
+    "evidence": [],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_prog_passes-william-saliba",
+    "question": "How many progressive passes did William Saliba make in 2025/2026?",
+    "answer": "124 progressive passes",
+    "answer_value": 124,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "William Saliba",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'William Saliba', 'team_name': 'Arsenal', 'appearances': 31, 'starts': 30, 'minutes': 2805, 'goals': 1, 'assists': 0, 'shots': 5, 'key_passes': 10, 'progressive_passes': 124, 'passes': 2119, 'passes_accurate': 1964, 'tackles': 42, 'interceptions': 17, 'ball_recoveries': 113, 'total_xt': Decimal('2.481'), 'avg_rating': Decimal('6.92'), 'goals_per_90': Decimal('0.03'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.98'), 'xt_per_90': Decimal('0.080')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2025-11-23",
+    "question": "What was the score when Arsenal played Tottenham on 2025-11-23?",
+    "answer": "Arsenal 4-1 Tottenham",
+    "answer_value": [
+      4,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Tottenham",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 4-1 Tottenham on 2025-11-23"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-declan-rice",
+    "question": "How many goals did Declan Rice score in 2025/2026?",
+    "answer": "4 goals",
+    "answer_value": 4,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Declan Rice",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Declan Rice', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 35, 'minutes': 3309, 'goals': 4, 'assists': 4, 'shots': 40, 'key_passes': 63, 'progressive_passes': 186, 'passes': 2363, 'passes_accurate': 1940, 'tackles': 84, 'interceptions': 37, 'ball_recoveries': 180, 'total_xt': Decimal('6.732'), 'avg_rating': Decimal('7.26'), 'goals_per_90': Decimal('0.11'), 'assists_per_90': Decimal('0.11'), 'prog_passes_per_90': Decimal('5.06'), 'xt_per_90': Decimal('0.183')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-riccardo-calafiori",
+    "question": "How many minutes did Riccardo Calafiori play in 2025/2026?",
+    "answer": "1826 minutes",
+    "answer_value": 1826,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Riccardo Calafiori",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Riccardo Calafiori', 'team_name': 'Arsenal', 'appearances': 28, 'starts': 22, 'minutes': 1826, 'goals': 1, 'assists': 0, 'shots': 32, 'key_passes': 9, 'progressive_passes': 66, 'passes': 923, 'passes_accurate': 757, 'tackles': 40, 'interceptions': 15, 'ball_recoveries': 73, 'total_xt': Decimal('0.520'), 'avg_rating': Decimal('6.84'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.25'), 'xt_per_90': Decimal('0.026')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "tac-refuse-injury",
+    "question": "Which Arsenal players were injured in December 2025?",
+    "answer": "The warehouse holds no injury or availability data \u2014 only match events, lineups and derived metrics. This cannot be answered from the available evidence.",
+    "answer_value": "refuse",
+    "answer_type": "refusal",
+    "family": "tactical_refusal",
+    "intent": "tactical",
+    "expected_tool": "none",
+    "expected_query": null,
+    "query_params": {},
+    "evidence": [],
+    "split": "test"
+  },
+  {
+    "id": "stat-match_score-2026-03-01",
+    "question": "What was the score when Arsenal played Chelsea on 2026-03-01?",
+    "answer": "Arsenal 2-1 Chelsea",
+    "answer_value": [
+      2,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Chelsea",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 2-1 Chelsea on 2026-03-01"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-william-saliba",
+    "question": "How many goals did William Saliba score in 2025/2026?",
+    "answer": "1 goals",
+    "answer_value": 1,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "William Saliba",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'William Saliba', 'team_name': 'Arsenal', 'appearances': 31, 'starts': 30, 'minutes': 2805, 'goals': 1, 'assists': 0, 'shots': 5, 'key_passes': 10, 'progressive_passes': 124, 'passes': 2119, 'passes_accurate': 1964, 'tackles': 42, 'interceptions': 17, 'ball_recoveries': 113, 'total_xt': Decimal('2.481'), 'avg_rating': Decimal('6.92'), 'goals_per_90': Decimal('0.03'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.98'), 'xt_per_90': Decimal('0.080')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-05-02",
+    "question": "What was the score when Arsenal played Fulham on 2026-05-02?",
+    "answer": "Arsenal 3-0 Fulham",
+    "answer_value": [
+      3,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Fulham",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 3-0 Fulham on 2026-05-02"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_xt-noni-madueke",
+    "question": "What was Noni Madueke's expected threat per 90 in 2025/2026?",
+    "answer": "0.065 xT per 90",
+    "answer_value": 0.065,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Noni Madueke",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Noni Madueke', 'team_name': 'Arsenal', 'appearances': 32, 'starts': 16, 'minutes': 1299, 'goals': 3, 'assists': 1, 'shots': 26, 'key_passes': 22, 'progressive_passes': 28, 'passes': 494, 'passes_accurate': 332, 'tackles': 42, 'interceptions': 5, 'ball_recoveries': 35, 'total_xt': Decimal('0.932'), 'avg_rating': Decimal('6.66'), 'goals_per_90': Decimal('0.21'), 'assists_per_90': Decimal('0.07'), 'prog_passes_per_90': Decimal('1.94'), 'xt_per_90': Decimal('0.065')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-01-31",
+    "question": "What was the score when Arsenal played Leeds on 2026-01-31?",
+    "answer": "Leeds 0-4 Arsenal",
+    "answer_value": [
+      4,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Leeds",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Leeds 0-4 Arsenal on 2026-01-31"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-02-22",
+    "question": "What was the score when Arsenal played Tottenham on 2026-02-22?",
+    "answer": "Tottenham 1-4 Arsenal",
+    "answer_value": [
+      4,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Tottenham",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Tottenham 1-4 Arsenal on 2026-02-22"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-riccardo-calafiori",
+    "question": "How many goals did Riccardo Calafiori score in 2025/2026?",
+    "answer": "1 goals",
+    "answer_value": 1,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Riccardo Calafiori",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Riccardo Calafiori', 'team_name': 'Arsenal', 'appearances': 28, 'starts': 22, 'minutes': 1826, 'goals': 1, 'assists': 0, 'shots': 32, 'key_passes': 9, 'progressive_passes': 66, 'passes': 923, 'passes_accurate': 757, 'tackles': 40, 'interceptions': 15, 'ball_recoveries': 73, 'total_xt': Decimal('0.520'), 'avg_rating': Decimal('6.84'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.25'), 'xt_per_90': Decimal('0.026')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-match_score-2026-03-04",
+    "question": "What was the score when Arsenal played Brighton on 2026-03-04?",
+    "answer": "Brighton 0-1 Arsenal",
+    "answer_value": [
+      1,
+      0
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Brighton",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Brighton 0-1 Arsenal on 2026-03-04"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_prog_passes-riccardo-calafiori",
+    "question": "How many progressive passes did Riccardo Calafiori make in 2025/2026?",
+    "answer": "66 progressive passes",
+    "answer_value": 66,
+    "answer_type": "number",
+    "family": "player_prog_passes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Riccardo Calafiori",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Riccardo Calafiori', 'team_name': 'Arsenal', 'appearances': 28, 'starts': 22, 'minutes': 1826, 'goals': 1, 'assists': 0, 'shots': 32, 'key_passes': 9, 'progressive_passes': 66, 'passes': 923, 'passes_accurate': 757, 'tackles': 40, 'interceptions': 15, 'ball_recoveries': 73, 'total_xt': Decimal('0.520'), 'avg_rating': Decimal('6.84'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.25'), 'xt_per_90': Decimal('0.026')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-season_ppda",
+    "question": "What was Arsenal's average PPDA in 2025/2026?",
+    "answer": "10.76 PPDA",
+    "answer_value": 10.76,
+    "answer_type": "number",
+    "family": "season_ppda",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "season_pressing",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[season_pressing] A team's average pressing metrics across a season: {'avg_ppda': Decimal('10.76'), 'avg_field_tilt': Decimal('63.15'), 'total_counterpresses': 2242, 'total_high_turnovers': 207, 'avg_sequence_events': Decimal('4.80'), 'matches': 38}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-match_score-2025-08-31",
+    "question": "What was the score when Arsenal played Liverpool on 2025-08-31?",
+    "answer": "Liverpool 1-0 Arsenal",
+    "answer_value": [
+      0,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Liverpool",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Liverpool 1-0 Arsenal on 2025-08-31"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_assists-viktor-gy\u00f6keres",
+    "question": "How many assists did Viktor Gy\u00f6keres provide in 2025/2026?",
+    "answer": "1 assists",
+    "answer_value": 1,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Viktor Gy\u00f6keres",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Viktor Gy\u00f6keres', 'team_name': 'Arsenal', 'appearances': 36, 'starts': 26, 'minutes': 2409, 'goals': 14, 'assists': 1, 'shots': 55, 'key_passes': 20, 'progressive_passes': 16, 'passes': 327, 'passes_accurate': 202, 'tackles': 15, 'interceptions': 1, 'ball_recoveries': 55, 'total_xt': Decimal('0.592'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.52'), 'assists_per_90': Decimal('0.04'), 'prog_passes_per_90': Decimal('0.60'), 'xt_per_90': Decimal('0.022')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-player_xt-declan-rice",
+    "question": "What was Declan Rice's expected threat per 90 in 2025/2026?",
+    "answer": "0.183 xT per 90",
+    "answer_value": 0.183,
+    "answer_type": "number",
+    "family": "player_xt",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Declan Rice",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Declan Rice', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 35, 'minutes': 3309, 'goals': 4, 'assists': 4, 'shots': 40, 'key_passes': 63, 'progressive_passes': 186, 'passes': 2363, 'passes_accurate': 1940, 'tackles': 84, 'interceptions': 37, 'ball_recoveries': 180, 'total_xt': Decimal('6.732'), 'avg_rating': Decimal('7.26'), 'goals_per_90': Decimal('0.11'), 'assists_per_90': Decimal('0.11'), 'prog_passes_per_90': Decimal('5.06'), 'xt_per_90': Decimal('0.183')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "tac-finishing",
+    "question": "Did Arsenal overperform their expected goals in 2025/26?",
+    "answer": "Yes, slightly. They scored 71 goals from 65.84 xG, about five more than their chances were worth across the season \u2014 finishing a little better than average rather than dramatically so.",
+    "answer_value": 5.16,
+    "answer_type": "judgement",
+    "family": "tactical_comparison",
+    "intent": "comparative",
+    "expected_tool": "sql",
+    "expected_query": "season_summary",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "71 goals",
+      "65.84 xG"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-match_score-2025-12-30",
+    "question": "What was the score when Arsenal played Aston Villa on 2025-12-30?",
+    "answer": "Arsenal 4-1 Aston Villa",
+    "answer_value": [
+      4,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Aston Villa",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Arsenal 4-1 Aston Villa on 2025-12-30"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_assists-riccardo-calafiori",
+    "question": "How many assists did Riccardo Calafiori provide in 2025/2026?",
+    "answer": "0 assists",
+    "answer_value": 0,
+    "answer_type": "number",
+    "family": "player_assists",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Riccardo Calafiori",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Riccardo Calafiori', 'team_name': 'Arsenal', 'appearances': 28, 'starts': 22, 'minutes': 1826, 'goals': 1, 'assists': 0, 'shots': 32, 'key_passes': 9, 'progressive_passes': 66, 'passes': 923, 'passes_accurate': 757, 'tackles': 40, 'interceptions': 15, 'ball_recoveries': 73, 'total_xt': Decimal('0.520'), 'avg_rating': Decimal('6.84'), 'goals_per_90': Decimal('0.05'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.25'), 'xt_per_90': Decimal('0.026')}"
+    ],
+    "split": "test"
+  },
+  {
+    "id": "stat-season_conceded",
+    "question": "How many goals did Arsenal concede in 2025/2026?",
+    "answer": "27 conceded",
+    "answer_value": 27,
+    "answer_type": "number",
+    "family": "season_conceded",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "season_summary",
+    "query_params": {
+      "team": "Arsenal",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[season_summary] A team's season record: played, won, drawn, lost, goals, points, xG: {'played': 38, 'won': 26, 'drawn': 7, 'lost': 5, 'goals_for': 71, 'goals_against': 27, 'goal_difference': 44, 'points': 85, 'total_xg': Decimal('65.84'), 'avg_possession': Decimal('55.89'), 'avg_field_tilt': Decimal('64.04')}"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_minutes-david-raya",
+    "question": "How many minutes did David Raya play in 2025/2026?",
+    "answer": "3573 minutes",
+    "answer_value": 3573,
+    "answer_type": "number",
+    "family": "player_minutes",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "David Raya",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'David Raya', 'team_name': 'Arsenal', 'appearances': 37, 'starts': 37, 'minutes': 3573, 'goals': 0, 'assists': 0, 'shots': 0, 'key_passes': 3, 'progressive_passes': 9, 'passes': 1275, 'passes_accurate': 882, 'tackles': 1, 'interceptions': 1, 'ball_recoveries': 53, 'total_xt': Decimal('2.451'), 'avg_rating': Decimal('6.65'), 'goals_per_90': Decimal('0.00'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('0.23'), 'xt_per_90': Decimal('0.062')}"
+    ],
+    "split": "dev"
+  },
+  {
+    "id": "stat-match_score-2025-11-30",
+    "question": "What was the score when Arsenal played Chelsea on 2025-11-30?",
+    "answer": "Chelsea 1-1 Arsenal",
+    "answer_value": [
+      1,
+      1
+    ],
+    "answer_type": "list",
+    "family": "match_score",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "match_result",
+    "query_params": {
+      "opponent": "Chelsea",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[match_result] Chelsea 1-1 Arsenal on 2025-11-30"
+    ],
+    "split": "train"
+  },
+  {
+    "id": "stat-player_goals-mart\u00edn-zubimendi",
+    "question": "How many goals did Mart\u00edn Zubimendi score in 2025/2026?",
+    "answer": "5 goals",
+    "answer_value": 5,
+    "answer_type": "number",
+    "family": "player_goals",
+    "intent": "statistical",
+    "expected_tool": "sql",
+    "expected_query": "player_season_totals",
+    "query_params": {
+      "player": "Mart\u00edn Zubimendi",
+      "season": "2025/2026"
+    },
+    "evidence": [
+      "[player_season_totals] A player's season totals: appearances, minutes, goals, assists, per-90s: {'player_name': 'Mart\u00edn Zubimendi', 'team_name': 'Arsenal', 'appearances': 38, 'starts': 34, 'minutes': 3206, 'goals': 5, 'assists': 0, 'shots': 27, 'key_passes': 19, 'progressive_passes': 132, 'passes': 1953, 'passes_accurate': 1697, 'tackles': 89, 'interceptions': 39, 'ball_recoveries': 116, 'total_xt': Decimal('2.384'), 'avg_rating': Decimal('6.87'), 'goals_per_90': Decimal('0.14'), 'assists_per_90': Decimal('0.00'), 'prog_passes_per_90': Decimal('3.71'), 'xt_per_90': Decimal('0.067')}"
+    ],
+    "split": "train"
+  }
+]

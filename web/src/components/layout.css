@@ -1,0 +1,9 @@
+.header-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-controls select {
+  margin-top: 2px;
+}
